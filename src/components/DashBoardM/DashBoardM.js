@@ -1,12 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import SignUpS from '../SignUpS';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import SignUpS from "../SignUpS";
+import ProfileM from "./components/ProfileM/ProfileM";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -37,7 +38,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -59,7 +60,11 @@ export default function SimpleTabs() {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="simple tabs example"
+        >
           <Tab label="Shift Management" {...a11yProps(0)} />
           <Tab label="People List" {...a11yProps(1)} />
           <Tab label="Personal Profile" {...a11yProps(2)} />
@@ -68,23 +73,19 @@ export default function SimpleTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        Display Shift
-        Add Shift Form
+        Display Shift Add Shift Form
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Display People List
-        Deactivate account of staff and shift manager
-        change per-default limits hours
+        Display People List Deactivate account of staff and shift manager change
+        per-default limits hours
       </TabPanel>
       <TabPanel value={value} index={2}>
-        View Profile
+        <ProfileM />
       </TabPanel>
-      <TabPanel value={value} index={3}>
-        
-      </TabPanel>
+      <TabPanel value={value} index={3}></TabPanel>
       <TabPanel value={value} index={4}>
         <SignUpS />
-        </TabPanel>
+      </TabPanel>
     </div>
   );
 }

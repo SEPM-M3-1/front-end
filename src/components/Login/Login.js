@@ -1,12 +1,9 @@
-import React,{useState} from 'react';
-import { Formik,Field,ErrorMessage,Form } from 'formik';
-import * as Yup from 'yup';
-import {
-  Link,
-  useHistory,
-} from 'react-router-dom';
-import * as api from '../Util/api';
-import './Login.css';
+import React, { useState } from "react";
+import { Formik, Field, ErrorMessage, Form } from "formik";
+import * as Yup from "yup";
+import { Link, useHistory } from "react-router-dom";
+import * as api from "../Util/api";
+import "./Login.css";
 
 const Login = () => {
   const history = useHistory();
@@ -14,32 +11,34 @@ const Login = () => {
   const [warning, setWarning] = useState(false);
 
   const initialValues = {
-    email: '',
-    password: '',
-    type:'',
-  }
+    email: "",
+    password: "",
+    type: "",
+  };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Please enter valid email').required('Email Required!'),
-    password: Yup.string().required('Password Required!'),
-  })
+    email: Yup.string()
+      .email("Please enter valid email")
+      .required("Email Required!"),
+    password: Yup.string().required("Password Required!"),
+  });
 
   const onSubmit = async ({ email, password, type }) => {
     console.log(email, password, type);
     if (type === "staff") {
-      history.push('/dashboards');
+      history.push("/dashboards");
     }
     if (type === "manager") {
-      history.push('/dashboardm');
+      history.push("/dashboardm");
     }
     try {
-      const loginRes = await api.login({ email, password, type })
+      const loginRes = await api.login({ email, password, type });
       if (loginRes.status === 200) {
         if (type === "staff") {
-          history.push('/dashboards');
+          history.push("/dashboards");
         }
         if (type === "manager") {
-          history.push('/dashboardm');
+          history.push("/dashboardm");
         }
       }
     } catch (error) {
@@ -47,12 +46,16 @@ const Login = () => {
         setWarning(true);
       }
     }
-  }
+  };
 
   return (
     <div className="login_form">
-      <h1 style={{display: "block"}}>Login</h1>
-      {warning? <span style={{color:"red"}}>Email,password or type are not exist</span> :null}
+      <h1 style={{ display: "block" }}>Login</h1>
+      {warning ? (
+        <span style={{ color: "red" }}>
+          Email,password or type are not exist
+        </span>
+      ) : null}
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -60,14 +63,14 @@ const Login = () => {
       >
         {({ isSubmitting }) => (
           <Form>
-             <label htmlFor="selection" style={{ display: "block" }}>
+            <label htmlFor="selection" style={{ display: "block" }}>
               Type
             </label>
             <Field as="select" name="type">
               <option>Select Your Type</option>
-             <option value="staff">Staff</option>
-             <option value="manager">Manager</option>
-           </Field>
+              <option value="staff">Staff</option>
+              <option value="manager">Manager</option>
+            </Field>
             <label htmlFor="email" style={{ display: "block" }}>
               Email
             </label>
@@ -79,7 +82,7 @@ const Login = () => {
               autoComplete="email"
             />
             <ErrorMessage name="email">
-            { (msg) => <span className="error">{msg}</span>}
+              {(msg) => <span className="error">{msg}</span>}
             </ErrorMessage>
             <label htmlFor="password" style={{ display: "block" }}>
               Password
@@ -92,8 +95,8 @@ const Login = () => {
               autoComplete="password"
             />
             <ErrorMessage name="password">
-            { (msg) => <span className="error">{msg}</span>}
-             </ErrorMessage>
+              {(msg) => <span className="error">{msg}</span>}
+            </ErrorMessage>
             <button
               type="submit"
               disabled={isSubmitting}
@@ -101,7 +104,9 @@ const Login = () => {
             >
               Sign in
             </button>
-            <Link id="signUpLink" className="link" to="/signup">SignUp</Link>
+            <Link id="signUpLink" className="link" to="/signup">
+              SignUp
+            </Link>
           </Form>
         )}
       </Formik>
