@@ -41,6 +41,7 @@ const Login = () => {
 
   return (
     <div className="login_form">
+      <h1 style={{display: "block"}}>Login</h1>
       {warning? <span style={{color:"red"}}>Email,password or type are not exist</span> :null}
       <Formik
         initialValues={initialValues}
@@ -70,7 +71,7 @@ const Login = () => {
             <ErrorMessage name="email">
             { (msg) => <span className="error">{msg}</span>}
             </ErrorMessage>
-            <label htmlFor="email" style={{ display: "block" }}>
+            <label htmlFor="password" style={{ display: "block" }}>
               Password
             </label>
             <Field

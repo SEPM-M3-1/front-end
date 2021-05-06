@@ -4,6 +4,7 @@ import {
   Route,
 } from 'react-router-dom';
 import Login from '../Login';
+import SignUpM from '../SignUpM';
 import './App.css';
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/" component={Login} />
-        <Route path="/Login" component={Login} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={SignUpM} />
       </Switch>
     </Router>
   );
