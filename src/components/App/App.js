@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom';
 import Login from '../Login';
 import SignUpM from '../SignUpM';
-import SignUpS from '../SignUpS';
 import DashBoardS from '../DashBoardS'
 import DashBoardM from '../DashBoardM'
 import './App.css';
@@ -17,7 +16,6 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route path="/login" component={Login} />
         <Route path="/signupm" component={SignUpM} />
-        <Route path="/signups" component={SignUpS} />
         <Route path="/dashboards" component={DashBoardS} />
         <Route path="/dashboardm" component={DashBoardM} />
       </Switch>

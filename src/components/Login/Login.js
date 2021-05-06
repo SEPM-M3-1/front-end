@@ -26,10 +26,21 @@ const Login = () => {
 
   const onSubmit = async ({ email, password, type }) => {
     console.log(email, password, type);
+    if (type === "staff") {
+      history.push('/dashboards');
+    }
+    if (type === "manager") {
+      history.push('/dashboardm');
+    }
     try {
       const loginRes = await api.login({ email, password, type })
       if (loginRes.status === 200) {
-        history.push("");
+        if (type === "staff") {
+          history.push('/dashboards');
+        }
+        if (type === "manager") {
+          history.push('/dashboardm');
+        }
       }
       /////jump to staff or manager
     } catch (error) {
