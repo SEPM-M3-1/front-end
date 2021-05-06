@@ -42,7 +42,6 @@ const Login = () => {
           history.push('/dashboardm');
         }
       }
-      /////jump to staff or manager
     } catch (error) {
       if (error.response.status === 400) {
         setWarning(true);
