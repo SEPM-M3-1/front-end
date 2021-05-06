@@ -171,6 +171,7 @@ const ProfileS = ({ email }) => {
                 Working hours limit
               </label>
               <Field
+                disabled="true"
                 label="timeLimit"
                 name="timeLimit"
                 id="timeLimit"
