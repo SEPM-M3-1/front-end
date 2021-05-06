@@ -22,3 +22,17 @@ export const sigunm = ({ email, fullName, password, mobile }) => axios({
     mobile
   },
 })
+
+export const siguns = ({ email, fullName, password, mobile,address,workingHours,preferredName }) => axios({
+  method: 'post',
+  url: `${baseUrl}/signups`,
+  params: {
+    email,
+    fullName,
+    password,
+    mobile,
+    address,
+    workingHours,
+    preferredName
+  },
+})
