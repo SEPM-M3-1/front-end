@@ -1,11 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import ProfileS from "./components/ProfileS/ProfileS";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,7 +37,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -58,7 +59,11 @@ export default function SimpleTabs() {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="simple tabs example"
+        >
           <Tab label="Shift Calendar" {...a11yProps(0)} />
           <Tab label="Personal Profile" {...a11yProps(1)} />
           <Tab label="Notification" {...a11yProps(2)} />
@@ -68,7 +73,7 @@ export default function SimpleTabs() {
         See the current shift
       </TabPanel>
       <TabPanel value={value} index={1}>
-        View Profile
+        <ProfileS />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Accept or refuse shift

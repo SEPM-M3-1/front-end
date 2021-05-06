@@ -78,3 +78,23 @@ export const getMprofile = ({ email }) =>
       email,
     },
   });
+
+export const getSprofile = ({ email }) =>
+  axios({
+    method: "get",
+    url: `${baseUrl}/getmprofile`,
+    params: {
+      email,
+    },
+  });
+
+export const changeSprofile = ({ fullName, phoneNum, email }) =>
+  axios({
+    method: "put",
+    url: `${baseUrl}/changemprofiles`,
+    params: {
+      email,
+      fullName,
+      phoneNum,
+    },
+  });
