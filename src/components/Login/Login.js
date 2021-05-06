@@ -91,7 +91,7 @@ const Login = () => {
             >
               Sign in
             </button>
-            <Link id="signUpLink" className="link" to="/signup"></Link>
+            <Link id="signUpLink" className="link" to="/signup">SignUp</Link>
           </Form>
         )}
       </Formik>
