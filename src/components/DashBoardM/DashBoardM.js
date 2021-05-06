@@ -6,6 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import SignUpS from '../SignUpS';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,6 +64,7 @@ export default function SimpleTabs() {
           <Tab label="People List" {...a11yProps(1)} />
           <Tab label="Personal Profile" {...a11yProps(2)} />
           <Tab label="Notification" {...a11yProps(3)} />
+          <Tab label="SignUp For Staff" {...a11yProps(4)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -80,6 +82,9 @@ export default function SimpleTabs() {
       <TabPanel value={value} index={3}>
         
       </TabPanel>
+      <TabPanel value={value} index={4}>
+        <SignUpS />
+        </TabPanel>
     </div>
   );
 }
