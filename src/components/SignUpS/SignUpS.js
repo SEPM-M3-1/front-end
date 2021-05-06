@@ -6,6 +6,7 @@ import {
   useHistory,
 } from 'react-router-dom';
 import * as api from '../Util/api';
+import './SignUpS.css';
 
 const SignUpS = () => {
   const history = useHistory();
@@ -71,7 +72,7 @@ const SignUpS = () => {
               autoComplete="email"
             />
             <ErrorMessage name="email">
-            { (msg) => <span className="error">{msg}</span>}
+            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
             </ErrorMessage>
             <label htmlFor="full-name" style={{ display: "block" }}>
               Full Name
@@ -84,7 +85,7 @@ const SignUpS = () => {
               autoComplete="fullName"
             />
             <ErrorMessage name="fullName">
-            { (msg) => <span className="error">{msg}</span>}
+            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
             </ErrorMessage>
             <label htmlFor="password" style={{ display: "block" }}>
               Initial Password
@@ -97,7 +98,7 @@ const SignUpS = () => {
               autoComplete="password"
             />
             <ErrorMessage name="password">
-            { (msg) => <span className="error">{msg}</span>}
+            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
             </ErrorMessage>
             <label htmlFor="mobile" style={{ display: "block" }}>
               Mobile Number
@@ -110,7 +111,7 @@ const SignUpS = () => {
               autoComplete="mobile"
             />
             <ErrorMessage name="mobile">
-            { (msg) => <span className="error">{msg}</span>}
+            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
             </ErrorMessage>
             <label htmlFor="preferredName" style={{ display: "block" }}>
               Preferred Name(Optional)
@@ -123,7 +124,7 @@ const SignUpS = () => {
               autoComplete="preferredName"
             />
             <ErrorMessage name="preferredName">
-            { (msg) => <span className="error">{msg}</span>}
+            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
             </ErrorMessage>
             <label htmlFor="address" style={{ display: "block" }}>
               Address
@@ -136,7 +137,7 @@ const SignUpS = () => {
               autoComplete="address"
             />
             <ErrorMessage name="address">
-            { (msg) => <span className="error">{msg}</span>}
+            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
             </ErrorMessage>
             <label htmlFor="workingHours" style={{ display: "block" }}>
               Limits for working hours per week
@@ -149,12 +150,12 @@ const SignUpS = () => {
               autoComplete="workingHours"
             />
             <ErrorMessage name="workingHours">
-            { (msg) => <span className="error">{msg}</span>}
+            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
              </ErrorMessage>
             <button
               type="submit"
               disabled={isSubmitting}
-              style={{ display: "block" }}
+              style={{ display: "block", margin:"auto"}}
             >
               Sign Up
             </button>

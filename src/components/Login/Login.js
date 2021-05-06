@@ -82,7 +82,7 @@ const Login = () => {
               autoComplete="email"
             />
             <ErrorMessage name="email">
-              {(msg) => <span className="error">{msg}</span>}
+              {(msg) => <span className="error"style={{ display: "block" }} >{msg}</span>}
             </ErrorMessage>
             <label htmlFor="password" style={{ display: "block" }}>
               Password
@@ -95,16 +95,16 @@ const Login = () => {
               autoComplete="password"
             />
             <ErrorMessage name="password">
-              {(msg) => <span className="error">{msg}</span>}
+              {(msg) => <span className="error" style={{ display: "block" }} >{msg}</span>}
             </ErrorMessage>
             <button
               type="submit"
               disabled={isSubmitting}
-              style={{ display: "block" }}
+              style={{ display: "block", margin:"auto"}}
             >
               Sign in
             </button>
-            <Link id="signUpLink" className="link" to="/signup">
+            <Link id="signUpLink" className="link" to="/signup" style={{ display: "block", margin:"auto"}}>
               SignUp
             </Link>
           </Form>

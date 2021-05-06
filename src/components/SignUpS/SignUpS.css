@@ -1,14 +1,10 @@
-.error {
-  color: red;
-}
-
-.login_form {
+.signup_form {
   padding: 30px;
   border: 1px black solid;
-  width: 300px;
+  width: 500px;
   text-align: center;
   margin: auto;
-  top: 50px;
+  top: 0px;
   left: 0px;
   right: 0px;
   bottom: 0px;
