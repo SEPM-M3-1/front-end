@@ -12,3 +12,7 @@
   right: 0px;
   width: 300px;
 }
+
+.cancelResetPasswordButton {
+  margin: 5px;
+}

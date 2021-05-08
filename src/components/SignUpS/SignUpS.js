@@ -1,12 +1,10 @@
-import React,{useState} from 'react';
-import { Formik,Field,ErrorMessage,Form } from 'formik';
-import * as Yup from 'yup';
-import {
-  Link,
-  useHistory,
-} from 'react-router-dom';
-import * as api from '../Util/api';
-import './SignUpS.css';
+import React, { useState } from "react";
+import { Formik, Field, ErrorMessage, Form } from "formik";
+import * as Yup from "yup";
+import { Link, useHistory } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import * as api from "../Util/api";
+import "./SignUpS.css";
 
 const SignUpS = () => {
   const history = useHistory();
@@ -14,46 +12,77 @@ const SignUpS = () => {
   const [warning, setWarning] = useState(false);
 
   const initialValues = {
-    email: '',
-    fullName:'',
-    password: '',
-    mobile: '',
-    address: '',
-    workingHours:'',
-    preferredName: ''
-  }
+    email: "",
+    fullName: "",
+    password: "",
+    mobile: "",
+    address: "",
+    workingHours: "",
+    preferredName: "",
+  };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Please enter valid email').required('Email Required!'),
-    fullName: Yup.string().required('FullName Required!'),
-    password: Yup.string().required('Password Required!')
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+    email: Yup.string()
+      .email("Please enter valid email")
+      .required("Email Required!"),
+    fullName: Yup.string().required("FullName Required!"),
+    password: Yup.string()
+      .required("Password Required!")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      ),
+    mobile: Yup.string().required("Mobile Required!"),
+    address: Yup.string().required("Address Required!"),
+    workingHours: Yup.string().required(
+      "Limits for working hours per week Required!"
     ),
-    mobile: Yup.string().required('Mobile Required!'),
-    address: Yup.string().required('Address Required!'),
-    workingHours: Yup.string().required('Limits for working hours per week Required!'),
-  })
+  });
 
-  const onSubmit = async ({ email, fullName, password, mobile,address,workingHours,preferredName }) => {
-    console.log(email, fullName, password, mobile,address,workingHours,preferredName);
+  const onSubmit = async ({
+    email,
+    fullName,
+    password,
+    mobile,
+    address,
+    workingHours,
+    preferredName,
+  }) => {
+    console.log(
+      email,
+      fullName,
+      password,
+      mobile,
+      address,
+      workingHours,
+      preferredName
+    );
     try {
-      const signupRes = await api.siguns({ email, fullName, password, mobile,address,workingHours,preferredName})
+      const signupRes = await api.siguns({
+        email,
+        fullName,
+        password,
+        mobile,
+        address,
+        workingHours,
+        preferredName,
+      });
       if (signupRes.status === 200) {
-        history.push('');
+        history.push("");
       }
     } catch (error) {
       if (error.response.status === 400) {
         setWarning(true);
       }
     }
-  }
+  };
 
   return (
     <div className="signup_form">
-      <h1 style={{display: "block"}}>Staff SignUp</h1>
-      {warning? <span style={{color:"red"}}>Email already exist</span> :null}
+      <h1 style={{ display: "block" }}>Staff SignUp</h1>
+      {warning ? (
+        <span style={{ color: "red" }}>Email already exist</span>
+      ) : null}
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -72,7 +101,11 @@ const SignUpS = () => {
               autoComplete="email"
             />
             <ErrorMessage name="email">
-            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
+              {(msg) => (
+                <span className="error" style={{ display: "block" }}>
+                  {msg}
+                </span>
+              )}
             </ErrorMessage>
             <label htmlFor="full-name" style={{ display: "block" }}>
               Full Name
@@ -85,7 +118,11 @@ const SignUpS = () => {
               autoComplete="fullName"
             />
             <ErrorMessage name="fullName">
-            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
+              {(msg) => (
+                <span className="error" style={{ display: "block" }}>
+                  {msg}
+                </span>
+              )}
             </ErrorMessage>
             <label htmlFor="password" style={{ display: "block" }}>
               Initial Password
@@ -98,7 +135,11 @@ const SignUpS = () => {
               autoComplete="password"
             />
             <ErrorMessage name="password">
-            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
+              {(msg) => (
+                <span className="error" style={{ display: "block" }}>
+                  {msg}
+                </span>
+              )}
             </ErrorMessage>
             <label htmlFor="mobile" style={{ display: "block" }}>
               Mobile Number
@@ -111,7 +152,11 @@ const SignUpS = () => {
               autoComplete="mobile"
             />
             <ErrorMessage name="mobile">
-            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
+              {(msg) => (
+                <span className="error" style={{ display: "block" }}>
+                  {msg}
+                </span>
+              )}
             </ErrorMessage>
             <label htmlFor="preferredName" style={{ display: "block" }}>
               Preferred Name(Optional)
@@ -124,7 +169,11 @@ const SignUpS = () => {
               autoComplete="preferredName"
             />
             <ErrorMessage name="preferredName">
-            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
+              {(msg) => (
+                <span className="error" style={{ display: "block" }}>
+                  {msg}
+                </span>
+              )}
             </ErrorMessage>
             <label htmlFor="address" style={{ display: "block" }}>
               Address
@@ -137,7 +186,11 @@ const SignUpS = () => {
               autoComplete="address"
             />
             <ErrorMessage name="address">
-            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
+              {(msg) => (
+                <span className="error" style={{ display: "block" }}>
+                  {msg}
+                </span>
+              )}
             </ErrorMessage>
             <label htmlFor="workingHours" style={{ display: "block" }}>
               Limits for working hours per week
@@ -150,15 +203,21 @@ const SignUpS = () => {
               autoComplete="workingHours"
             />
             <ErrorMessage name="workingHours">
-            { (msg) => <span className="error" style={{ display: "block" }}>{msg}</span>}
-             </ErrorMessage>
-            <button
+              {(msg) => (
+                <span className="error" style={{ display: "block" }}>
+                  {msg}
+                </span>
+              )}
+            </ErrorMessage>
+            <Button
+              variant="contained"
+              color="primary"
               type="submit"
               disabled={isSubmitting}
-              style={{ display: "block", margin:"auto"}}
+              style={{ display: "block", margin: "auto" }}
             >
               Sign Up
-            </button>
+            </Button>
           </Form>
         )}
       </Formik>

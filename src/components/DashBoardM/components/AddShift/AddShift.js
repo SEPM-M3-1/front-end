@@ -7,6 +7,7 @@ import {
   DayView,
   Appointments,
 } from "@devexpress/dx-react-scheduler-material-ui";
+import Button from "@material-ui/core/Button";
 import "./AddShift.css";
 
 const AddShift = () => {
@@ -125,7 +126,9 @@ const AddShift = () => {
       <div className="AddArea">
         {!showAddForm ? (
           <div className="resetPasswordButton">
-            <button onClick={onClick}>Add Shift</button>
+            <Button variant="contained" color="primary" onClick={onClick}>
+              Add Shift
+            </Button>
           </div>
         ) : null}
 
@@ -218,15 +221,22 @@ const AddShift = () => {
                     </div>
 
                     <div className="itemLabel">
-                      <button type="submit" disabled={isSubmitting}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        disabled={isSubmitting}
+                      >
                         Add the Shift
-                      </button>
+                      </Button>
                     </div>
                   </Form>
                 )}
               </Formik>
               <div className="cancelResetPasswordButton">
-                <button onClick={onClick}>Cancel</button>
+                <Button variant="contained" color="primary" onClick={onClick}>
+                  Cancel
+                </Button>
               </div>
             </div>
           </div>

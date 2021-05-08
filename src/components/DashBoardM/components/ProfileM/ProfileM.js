@@ -3,6 +3,7 @@ import { Formik, Field, ErrorMessage, Form } from "formik";
 import { Link, useHistory } from "react-router-dom";
 import * as api from "../../../Util/api";
 import * as Yup from "yup";
+import Button from "@material-ui/core/Button";
 import "./ProfileM.css";
 
 const ProfileM = ({ email }) => {
@@ -185,9 +186,14 @@ const ProfileM = ({ email }) => {
               </div>
 
               <div className="itemLabel">
-                <button type="submit" disabled={isSubmitting}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  disabled={isSubmitting}
+                >
                   Comfirm Change
-                </button>
+                </Button>
               </div>
             </Form>
           )}
@@ -196,7 +202,9 @@ const ProfileM = ({ email }) => {
 
       {!showPasswordForm ? (
         <div className="resetPasswordButton">
-          <button onClick={onclick}>Reset Password</button>
+          <Button variant="contained" color="primary" onClick={onclick}>
+            Reset Password
+          </Button>
         </div>
       ) : null}
 
@@ -258,15 +266,22 @@ const ProfileM = ({ email }) => {
                   </div>
 
                   <div className="itemLabel">
-                    <button type="submit" disabled={isSubmitting}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      disabled={isSubmitting}
+                    >
                       Reset Password
-                    </button>
+                    </Button>
                   </div>
                 </Form>
               )}
             </Formik>
             <div className="cancelResetPasswordButton">
-              <button onClick={onclick}>Cancel</button>
+              <Button variant="contained" color="primary" onClick={onclick}>
+                Cancel
+              </Button>
             </div>
           </div>
         </div>
