@@ -140,3 +140,12 @@ export const getAllStaffs = (type) => axios({
     type
   }
 })
+
+export const changeHours = (email, hours) => axios({
+  method: 'put',
+  url: `${baseUrl}/newLimitHours`,
+  data: {
+    email,
+    hours
+  }
+})

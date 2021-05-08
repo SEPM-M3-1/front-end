@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-sequences */
 import React,{useState,useEffect} from 'react';
@@ -10,6 +11,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { Formik, Field, ErrorMessage, Form } from "formik";
 import * as api from '../../../Util/api';
 import './PeopleList.css'
 
@@ -20,7 +28,15 @@ const useStyles = makeStyles({
 });
 
 const PeopleList = () => {
-    const classes = useStyles();
+  const classes = useStyles();
+  
+  const [open, setOpen] = React.useState(false);
+
+  const [hours, setHours] = useState({
+    email: '',
+    name:'',
+    newHours: '',
+  })
 
     const [staff, setStaff] = useState({
       staffList: []
@@ -84,7 +100,7 @@ const PeopleList = () => {
           address: '102 box st'
         }, {
           fullName: 'staff2',
-          limitHours: "40",
+          limitHours: "50",
           email: 'staff2@gmail.com',
           mobile: '0451172301',
           address: '102 box st'
@@ -101,9 +117,39 @@ const PeopleList = () => {
     const { managerList } = manager;
 
   const handleEdit = (row) => {
-    const email = row.email;
-    console.log(email);
-    }
+    const staffEmail = row.email;
+    const currentHours = row.limitHours;
+    const fullName = row.fullName;
+    setOpen(true);
+    setHours({
+      email:staffEmail,
+      name: fullName,
+      newHours: currentHours,
+    })
+  }
+  
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const initialValues = {
+    hour: "",
+  }
+
+  const handleChange = async ({ hour }) => {
+    setOpen(false);
+    const email = hours.email;
+    console.log(email, hour);
+    // try {
+    //   const changeHoursRes = await api.changeHours({ email, hour });
+    //   if (changeHoursRes.status === 200) {
+            // console.log("change success");
+    //   }
+    // } catch (error) {
+      
+    // }
+
+  };
   return (
     <div className="list">
     <div className="title">Manager</div>
@@ -158,8 +204,38 @@ const PeopleList = () => {
                   color="primary"
                   onClick={()=> handleEdit(row)}
                 >
-                  Edit
+                  Edit Limit Hours
                 </Button>
+                <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                  <DialogTitle id="form-dialog-title">Change working Hours</DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>
+                      {hours.name}'s current weekly working time is {hours.newHours} hours.
+                    </DialogContentText>
+                    <Formik
+                      initialValues={initialValues}
+                      onSubmit={handleChange}
+                    >
+                      <Form >
+                        <Field
+                            as={TextField}
+                        autoFocus
+                        margin="dense"
+                          id="hour"
+                          name="hour"
+                        label="Limit Working Hours"
+                        fullWidth
+                        />                       
+                        <DialogActions>
+                          <Button onClick={handleClose} color="primary">
+                            Cancel
+                          </Button>
+                          <Button type="submit" color="primary" >Save Change</Button>
+                        </DialogActions>
+                      </Form>
+                    </Formik>
+                  </DialogContent>
+                </Dialog>
               </TableCell>
             </TableRow>
           ))}
