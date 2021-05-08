@@ -124,3 +124,19 @@ export const refuse = ({ email, fullName, date,refuseTime }) => axios({
     refuseTime,
   }
 })
+
+export const getAllManagers = (type) => axios({
+  method: 'get',
+  url: `${baseUrl}/all-managers`,
+  params: {
+    type
+  }
+})
+
+export const getAllStaffs = (type) => axios({
+  method: 'get',
+  url: `${baseUrl}/all-staffs`,
+  params: {
+    type
+  }
+})

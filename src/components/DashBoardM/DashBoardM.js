@@ -6,10 +6,12 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import SignUpS from "../SignUpS";
-import ProfileM from "./components/ProfileM/ProfileM";
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import SignUpS from "../SignUpS";
+import ProfileM from "./components/ProfileM/ProfileM";
+import PeopleList from './components/PeopleList';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -78,8 +80,7 @@ export default function SimpleTabs() {
         Display Shift Add Shift Form
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Display People List Deactivate account of staff and shift manager change
-        per-default limits hours
+       <PeopleList />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <ProfileM />
