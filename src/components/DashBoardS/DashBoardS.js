@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import ProfileS from "./components/ProfileS/ProfileS";
 import NotificationS from './components/NotificationS';
+import { Link } from 'react-router-dom';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -68,6 +69,7 @@ export default function SimpleTabs() {
           <Tab label="Shift Calendar" {...a11yProps(0)} />
           <Tab label="Personal Profile" {...a11yProps(1)} />
           <Tab label="Notification" {...a11yProps(2)} />
+          <Tab label="Logout" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -78,6 +80,9 @@ export default function SimpleTabs() {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <NotificationS />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <Link to='/login'>Logout</Link>
       </TabPanel>
     </div>
   );
