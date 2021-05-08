@@ -105,7 +105,7 @@ const PeopleList = () => {
     console.log(email);
     }
   return (
-    <>
+    <div className="list">
     <div className="title">Manager</div>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -166,7 +166,7 @@ const PeopleList = () => {
         </TableBody>
       </Table>
       </TableContainer>
-      </>
+      </div>
   );
 }
 
