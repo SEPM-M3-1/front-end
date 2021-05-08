@@ -98,3 +98,29 @@ export const changeSprofile = ({ fullName, phoneNum, email }) =>
       phoneNum,
     },
   });
+
+export const getNotification = (email) => axios({
+  method: "get",
+  url: `${baseUrl}/notification/${email}`,
+})
+  
+export const accept = ({ email, fullName, date }) => axios({
+  method: "post",
+  url: `${baseUrl}/accept`,
+  data: {
+    email,
+    fullName,
+    date,
+  }
+})
+
+export const refuse = ({ email, fullName, date,refuseTime }) => axios({
+  method: "delete",
+  url: `${baseUrl}/refuse`,
+  data: {
+    email,
+    fullName,
+    date,
+    refuseTime,
+  }
+})

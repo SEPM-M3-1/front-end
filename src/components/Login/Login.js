@@ -24,6 +24,7 @@ const Login = () => {
   });
 
   const onSubmit = async ({ email, password, type }) => {
+    localStorage.setItem("email", email);
     console.log(email, password, type);
     if (type === "staff") {
       history.push("/dashboards");

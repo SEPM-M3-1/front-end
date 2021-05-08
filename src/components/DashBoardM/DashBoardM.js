@@ -68,8 +68,7 @@ export default function SimpleTabs() {
           <Tab label="Shift Management" {...a11yProps(0)} />
           <Tab label="People List" {...a11yProps(1)} />
           <Tab label="Personal Profile" {...a11yProps(2)} />
-          <Tab label="Notification" {...a11yProps(3)} />
-          <Tab label="SignUp For Staff" {...a11yProps(4)} />
+          <Tab label="SignUp For Staff" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -82,8 +81,7 @@ export default function SimpleTabs() {
       <TabPanel value={value} index={2}>
         <ProfileM />
       </TabPanel>
-      <TabPanel value={value} index={3}></TabPanel>
-      <TabPanel value={value} index={4}>
+      <TabPanel value={value} index={3}>
         <SignUpS />
       </TabPanel>
     </div>
