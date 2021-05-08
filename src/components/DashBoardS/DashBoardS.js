@@ -7,9 +7,10 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import ProfileS from "./components/ProfileS/ProfileS";
-import NotificationS from './components/NotificationS';
-import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+import NotificationS from "./components/NotificationS";
+import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import ShiftTable from "./components/ShiftTable/ShiftTable";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,7 +75,7 @@ export default function SimpleTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        See the current shift
+        <ShiftTable />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <ProfileS />
@@ -83,8 +84,10 @@ export default function SimpleTabs() {
         <NotificationS />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <Link to='/login'>
-          <Button variant="contained" color="primary">Logout</Button>
+        <Link to="/login">
+          <Button variant="contained" color="primary">
+            Logout
+          </Button>
         </Link>
       </TabPanel>
     </div>

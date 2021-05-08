@@ -6,7 +6,7 @@ import {
   DayView,
   Appointments,
 } from "@devexpress/dx-react-scheduler-material-ui";
-import "./AddShift.css";
+import "./ShiftTable.css";
 
 const currentDate1 = "2021-05-10";
 const currentDate2 = "2021-05-11";
@@ -28,12 +28,12 @@ const schedulerData = [
   {
     startDate: "2021-05-12T07:30",
     endDate: "2021-05-12T11:30",
-    title: "Long",
+    title: "Ze Long",
   },
   {
     startDate: "2021-05-13T13:30",
     endDate: "2021-05-13T17:30",
-    title: "ShuHao",
+    title: "Shu Hao",
   },
   {
     startDate: "2021-05-14T07:30",
@@ -42,7 +42,7 @@ const schedulerData = [
   },
 ];
 
-const AddShift = () => {
+const ShiftTable = () => {
   return (
     <div className="shfitContainor">
       <div className="shiftTabel">
@@ -98,4 +98,4 @@ const AddShift = () => {
   );
 };
 
-export default AddShift;
+export default ShiftTable;
