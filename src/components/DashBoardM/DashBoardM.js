@@ -9,6 +9,7 @@ import Box from "@material-ui/core/Box";
 import SignUpS from "../SignUpS";
 import ProfileM from "./components/ProfileM/ProfileM";
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -87,7 +88,9 @@ export default function SimpleTabs() {
         <SignUpS />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <Link to='/login'>Logout</Link>
+        <Link to='/login'>
+          <Button variant="contained" color="primary">Logout</Button>
+        </Link>
       </TabPanel>
     </div>
   );

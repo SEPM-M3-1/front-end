@@ -9,6 +9,7 @@ import Box from "@material-ui/core/Box";
 import ProfileS from "./components/ProfileS/ProfileS";
 import NotificationS from './components/NotificationS';
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -82,7 +83,9 @@ export default function SimpleTabs() {
         <NotificationS />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <Link to='/login'>Logout</Link>
+        <Link to='/login'>
+          <Button variant="contained" color="primary">Logout</Button>
+        </Link>
       </TabPanel>
     </div>
   );
