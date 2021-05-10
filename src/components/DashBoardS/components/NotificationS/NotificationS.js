@@ -24,10 +24,12 @@ const NotificationS = () => {
     setMessage({
       list: [{
         fullName: 'Plus',
-        date:'2020/05/12',
+        startTime: '2020/05/12/8:00AM',
+        endTime: '2020/05/12/12:00AM'
       },{
         fullName: 'Plus',
-        date:'2020/05/15',
+        startTime: '2020/05/15/8:00AM',
+        endTime: '2020/05/15/12:00AM'
       }
       ]
     })
@@ -54,14 +56,15 @@ const NotificationS = () => {
   const handleAccept = async (result, index) => {
     const fullName = result.fullName;
     const email = localStorage.getItem("email");
-    const date = result.date;
+    const startTime = result.startTime;
+    const endTime = result.endTime;
     const newAccept = [...list];
     newAccept.splice(index, 1)
     setMessage({
       list: newAccept,
     })
     // try {
-    //   const acceptRes = await api.accept({ email, fullName, date });
+    //   const acceptRes = await api.accept({ email, fullName, startTime, endTime });
     //   if (acceptRes.status === 200) {
     //     const newAccept = [...list];
     //     newAccept.splice(index, 1)
@@ -79,16 +82,15 @@ const NotificationS = () => {
   const handleRefuse = async (result, index) => {
     const fullName = result.fullName;
     const email = localStorage.getItem("email");
-    const date = result.date;
-    const refuseTime = new Date();
-    console.log(refuseTime);
+    const startTime = result.startTime;
+    const endTime = result.endTime;
     const newRefuse = [...list];
     newRefuse.splice(index, 1)
     setMessage({
       list: newRefuse,
     })
     // try {
-    //   const refuseRes = await api.refuse({ email, fullName, date,refuseTime });
+    //   const refuseRes = await api.refuse({ email, fullName, startTime, endTime });
     //   if (refuseRes.status === 200) {
     //     const newRefuse = [...list];
     //     newRefuse.splice(index, 1)
@@ -107,7 +109,7 @@ const NotificationS = () => {
     <div className="message-display">
       {list.map((result, index) => (
         <div>
-          <p>Hi {result.fullName}, I plan to arrange your shift in {result.date}</p>
+          <p>Hi {result.fullName}, I plan to arrange your shift from {result.startTime} to {result.endTime}</p>
           <div className={classes.root}>
             <Button variant="contained" color="primary" onClick={()=> handleAccept(result,index)}>Accept</Button>
             <Button  variant="contained" onClick={()=> handleRefuse(result,index)}>Refuse</Button>

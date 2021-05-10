@@ -114,14 +114,14 @@ export const accept = ({ email, fullName, date }) => axios({
   }
 })
 
-export const refuse = ({ email, fullName, date,refuseTime }) => axios({
+export const refuse = ({ email, fullName, startTime, endTime }) => axios({
   method: "delete",
   url: `${baseUrl}/refuse`,
   data: {
     email,
     fullName,
-    date,
-    refuseTime,
+    startTime,
+    endTime,
   }
 })
 
@@ -149,3 +149,6 @@ export const changeHours = (email, hours) => axios({
     hours
   }
 })
+
+
+

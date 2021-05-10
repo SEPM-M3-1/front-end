@@ -105,7 +105,7 @@ const Login = () => {
             >
               Sign in
             </button>
-            <Link id="signUpLink" className="link" to="/signup" style={{ display: "block", margin:"auto"}}>
+            <Link id="signUpLink" className="link" to="/signupm" style={{ display: "block", margin:"auto"}}>
               SignUp
             </Link>
           </Form>
