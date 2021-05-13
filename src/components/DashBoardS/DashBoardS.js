@@ -10,7 +10,9 @@ import ProfileS from "./components/ProfileS/ProfileS";
 import NotificationS from "./components/NotificationS";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import ShiftTable from "./components/ShiftTable/ShiftTable";
+// import ShiftTable from "./components/ShiftTable/ShiftTable";
+// import Calendar from "./components/ShiftTable/Calendar";
+import Demo from "./components/ShiftTable/Calendar";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -75,7 +77,8 @@ export default function SimpleTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <ShiftTable />
+        {/* <ShiftTable /> */}
+        <Demo />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <ProfileS />

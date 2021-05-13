@@ -59,12 +59,13 @@ export const changeMprofile = ({ fullName, phoneNum, email }) =>
     },
   });
 
-export const ChangePassword = ({ email, oldPassword, password }) =>
+export const ChangePassword = ({ type, id, oldPassword, password }) =>
   axios({
     method: "put",
     url: `${baseUrl}/Changepasswords`,
     params: {
-      email,
+      type,
+      id,
       oldPassword,
       password,
     },
@@ -99,21 +100,13 @@ export const changeSprofile = ({ fullName, phoneNum, email }) =>
     },
   });
 
-export const getNotification = (email) => axios({
-  method: "get",
-  url: `${baseUrl}/notification/${email}`,
-})
-  
-export const accept = ({ email, fullName, date }) => axios({
-  method: "post",
-  url: `${baseUrl}/accept`,
-  data: {
-    email,
-    fullName,
-    date,
-  }
-})
+export const getNotification = (email) =>
+  axios({
+    method: "get",
+    url: `${baseUrl}/notification/${email}`,
+  });
 
+<<<<<<< HEAD
 export const refuse = ({ email, fullName, startTime, endTime }) => axios({
   method: "delete",
   url: `${baseUrl}/refuse`,
@@ -124,23 +117,50 @@ export const refuse = ({ email, fullName, startTime, endTime }) => axios({
     endTime,
   }
 })
+=======
+export const accept = ({ email, fullName, date }) =>
+  axios({
+    method: "post",
+    url: `${baseUrl}/accept`,
+    data: {
+      email,
+      fullName,
+      date,
+    },
+  });
 
-export const getAllManagers = (type) => axios({
-  method: 'get',
-  url: `${baseUrl}/all-managers`,
-  params: {
-    type
-  }
-})
+export const refuse = ({ email, fullName, date, refuseTime }) =>
+  axios({
+    method: "delete",
+    url: `${baseUrl}/refuse`,
+    data: {
+      email,
+      fullName,
+      date,
+      refuseTime,
+    },
+  });
+>>>>>>> 4e93f3d (shift table)
 
-export const getAllStaffs = (type) => axios({
-  method: 'get',
-  url: `${baseUrl}/all-staffs`,
-  params: {
-    type
-  }
-})
+export const getAllManagers = (type) =>
+  axios({
+    method: "get",
+    url: `${baseUrl}/all-managers`,
+    params: {
+      type,
+    },
+  });
 
+export const getAllStaffs = (type) =>
+  axios({
+    method: "get",
+    url: `${baseUrl}/all-staffs`,
+    params: {
+      type,
+    },
+  });
+
+<<<<<<< HEAD
 export const changeHours = (email, hours) => axios({
   method: 'put',
   url: `${baseUrl}/newLimitHours`,
@@ -152,3 +172,14 @@ export const changeHours = (email, hours) => axios({
 
 
 
+=======
+export const changeHours = (email, hours) =>
+  axios({
+    method: "put",
+    url: `${baseUrl}/newLimitHours`,
+    data: {
+      email,
+      hours,
+    },
+  });
+>>>>>>> 4e93f3d (shift table)
