@@ -106,7 +106,6 @@ export const getNotification = (email) =>
     url: `${baseUrl}/notification/${email}`,
   });
 
-<<<<<<< HEAD
 export const refuse = ({ email, fullName, startTime, endTime }) => axios({
   method: "delete",
   url: `${baseUrl}/refuse`,
@@ -117,30 +116,6 @@ export const refuse = ({ email, fullName, startTime, endTime }) => axios({
     endTime,
   }
 })
-=======
-export const accept = ({ email, fullName, date }) =>
-  axios({
-    method: "post",
-    url: `${baseUrl}/accept`,
-    data: {
-      email,
-      fullName,
-      date,
-    },
-  });
-
-export const refuse = ({ email, fullName, date, refuseTime }) =>
-  axios({
-    method: "delete",
-    url: `${baseUrl}/refuse`,
-    data: {
-      email,
-      fullName,
-      date,
-      refuseTime,
-    },
-  });
->>>>>>> 4e93f3d (shift table)
 
 export const getAllManagers = (type) =>
   axios({
@@ -160,7 +135,6 @@ export const getAllStaffs = (type) =>
     },
   });
 
-<<<<<<< HEAD
 export const changeHours = (email, hours) => axios({
   method: 'put',
   url: `${baseUrl}/newLimitHours`,
@@ -172,14 +146,3 @@ export const changeHours = (email, hours) => axios({
 
 
 
-=======
-export const changeHours = (email, hours) =>
-  axios({
-    method: "put",
-    url: `${baseUrl}/newLimitHours`,
-    data: {
-      email,
-      hours,
-    },
-  });
->>>>>>> 4e93f3d (shift table)
