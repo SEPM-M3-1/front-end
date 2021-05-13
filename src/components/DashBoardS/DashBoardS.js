@@ -77,8 +77,9 @@ export default function SimpleTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        {/* <ShiftTable /> */}
+        <div style={{ width: "1200px", margin: "0 auto", height: "80vh" }}>
         <StaffShift />
+        </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <ProfileS />

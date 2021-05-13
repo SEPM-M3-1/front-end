@@ -403,7 +403,7 @@ class ManagerShift extends React.PureComponent {
     const { data } = this.state;
 
     return (
-      <Paper>
+      <Paper className="size">
         <Scheduler data={data}>
           <EditingState onCommitChanges={this.commitChanges} />
           <ViewState defaultCurrentDate={Date()} />
