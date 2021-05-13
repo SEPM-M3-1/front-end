@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 import SignUpS from "../SignUpS";
 import ProfileM from "./components/ProfileM/ProfileM";
 import PeopleList from "./components/PeopleList";
-import AddShift from "./components/AddShift/AddShift";
+import ManagerShift from './components/ManagerShift';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -77,7 +77,7 @@ export default function SimpleTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <AddShift />{" "}
+        <ManagerShift />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <PeopleList />

@@ -12,6 +12,8 @@ import classNames from "clsx";
 import {
   Scheduler,
   MonthView,
+  WeekView,
+  ViewSwitcher,
   Appointments,
   Toolbar,
   DateNavigator,
@@ -21,107 +23,14 @@ import {
   Resources,
   DragDropProvider,
 } from "@devexpress/dx-react-scheduler-material-ui";
-import WbSunny from "@material-ui/icons/WbSunny";
-import FilterDrama from "@material-ui/icons/FilterDrama";
-import Opacity from "@material-ui/icons/Opacity";
-import ColorLens from "@material-ui/icons/ColorLens";
+// import WbSunny from "@material-ui/icons/WbSunny";
+// import FilterDrama from "@material-ui/icons/FilterDrama";
+// import Opacity from "@material-ui/icons/Opacity";
+// import ColorLens from "@material-ui/icons/ColorLens";
 import { withStyles } from "@material-ui/core/styles";
-import { owners } from "./demo-task/tasks";
+import { owners } from "./tasks";
 
-const appointments = [
-  {
-    id: 0,
-    title: "Watercolor Landscape",
-    startDate: new Date(2018, 6, 23, 9, 30),
-    endDate: new Date(2018, 6, 23, 11, 30),
-    ownerId: 1,
-  },
-  {
-    id: 1,
-    title: "Monthly Planning",
-    startDate: new Date(2018, 5, 28, 9, 30),
-    endDate: new Date(2018, 5, 28, 11, 30),
-    ownerId: 1,
-  },
-  {
-    id: 2,
-    title: "Recruiting students",
-    startDate: new Date(2018, 6, 9, 12, 0),
-    endDate: new Date(2018, 6, 9, 13, 0),
-    ownerId: 2,
-  },
-  {
-    id: 3,
-    title: "Oil Painting",
-    startDate: new Date(2018, 6, 18, 14, 30),
-    endDate: new Date(2018, 6, 18, 15, 30),
-    ownerId: 2,
-  },
-  {
-    id: 4,
-    title: "Open Day",
-    startDate: new Date(2018, 6, 20, 12, 0),
-    endDate: new Date(2018, 6, 20, 13, 35),
-    ownerId: 6,
-  },
-  {
-    id: 5,
-    title: "Watercolor Landscape",
-    startDate: new Date(2018, 6, 6, 13, 0),
-    endDate: new Date(2018, 6, 6, 14, 0),
-    rRule: "FREQ=WEEKLY;BYDAY=FR;UNTIL=20180816",
-    exDate: "20180713T100000Z,20180727T100000Z",
-    ownerId: 2,
-  },
-  {
-    id: 6,
-    title: "Meeting of Instructors",
-    startDate: new Date(2018, 5, 28, 12, 0),
-    endDate: new Date(2018, 5, 28, 12, 30),
-    rRule: "FREQ=WEEKLY;BYDAY=TH;UNTIL=20180727",
-    exDate: "20180705T090000Z,20180719T090000Z",
-    ownerId: 5,
-  },
-  {
-    id: 7,
-    title: "Oil Painting for Beginners",
-    startDate: new Date(2018, 6, 3, 11, 0),
-    endDate: new Date(2018, 6, 3, 12, 0),
-    rRule: "FREQ=WEEKLY;BYDAY=TU;UNTIL=20180801",
-    exDate: "20180710T080000Z,20180724T080000Z",
-    ownerId: 3,
-  },
-  {
-    id: 8,
-    title: "Watercolor Workshop",
-    startDate: new Date(2018, 6, 9, 11, 0),
-    endDate: new Date(2018, 6, 9, 12, 0),
-    ownerId: 3,
-  },
-];
-
-const resources = [
-  {
-    fieldName: "ownerId",
-    title: "Owners",
-    instances: owners,
-  },
-];
-
-const getBorder = (theme) =>
-  `1px solid ${
-    theme.palette.type === "light"
-      ? lighten(fade(theme.palette.divider, 1), 0.88)
-      : darken(fade(theme.palette.divider, 1), 0.68)
-  }`;
-
-const DayScaleCell = (props) => (
-  <MonthView.DayScaleCell
-    {...props}
-    style={{ textAlign: "center", fontWeight: "bold" }}
-  />
-);
-
+// Start Style
 const styles = (theme) => ({
   cell: {
     color: "#78909C!important",
@@ -144,7 +53,7 @@ const styles = (theme) => ({
       backgroundColor: "white",
     },
     "&:focus": {
-      backgroundColor: fade(theme.palette.primary.main, 0.15),
+      backgroundColor: fade(theme.palette.primary.main, 0.14),
       outline: 0,
     },
   },
@@ -157,11 +66,11 @@ const styles = (theme) => ({
     alignItems: "center",
   },
   text: {
-    padding: "0.5em",
+    padding: "0.4em",
     textAlign: "center",
   },
   sun: {
-    color: "#FFEE58",
+    color: "#FFEE48",
   },
   cloud: {
     color: "#90A4AE",
@@ -176,15 +85,15 @@ const styles = (theme) => ({
     backgroundColor: "#ECEFF1",
   },
   rainBack: {
-    backgroundColor: "#E1F5FE",
+    backgroundColor: "#E1F4FE",
   },
   opacity: {
-    opacity: "0.5",
+    opacity: "0.4",
   },
   appointment: {
     borderRadius: "10px",
     "&:hover": {
-      opacity: 0.6,
+      opacity: 0.4,
     },
   },
   apptContent: {
@@ -212,7 +121,7 @@ const styles = (theme) => ({
     display: "inline-block",
   },
   title: {
-    ...theme.typography.h6,
+    ...theme.typography.h4,
     color: theme.palette.text.secondary,
     fontWeight: theme.typography.fontWeightBold,
     overflow: "hidden",
@@ -224,8 +133,8 @@ const styles = (theme) => ({
     verticalAlign: "middle",
   },
   circle: {
-    width: theme.spacing(4.5),
-    height: theme.spacing(4.5),
+    width: theme.spacing(4.4),
+    height: theme.spacing(4.4),
     verticalAlign: "super",
   },
   textCenter: {
@@ -238,22 +147,150 @@ const styles = (theme) => ({
     paddingBottom: theme.spacing(2),
   },
   container: {
-    paddingBottom: theme.spacing(1.5),
+    paddingBottom: theme.spacing(1.4),
   },
 });
 
 const WeatherIcon = ({ classes, id }) => {
   switch (id) {
     case 0:
-      return <Opacity className={classes.rain} fontSize="large" />;
+      return null;
+      // return <Opacity className={classes.rain} fontSize="large" />;
     case 1:
-      return <WbSunny className={classes.sun} fontSize="large" />;
+      return null;
+      // return <WbSunny className={classes.sun} fontSize="large" />;
     case 2:
-      return <FilterDrama className={classes.cloud} fontSize="large" />;
+      return null;
+      // return <FilterDrama className={classes.cloud} fontSize="large" />;
     default:
       return null;
   }
 };
+
+// use axios in here to acquire these data
+const appointments = [
+  {
+    id: 0,
+    title: "Tianqi Liao",
+    startDate: new Date(2021, 4, 10, 8, 0),
+    endDate: new Date(2021, 4, 10, 12, 0),
+    ownerId: 1,
+  },
+  {
+    id: 1,
+    title: "Shuhao Liu",
+    startDate: new Date(2021, 4, 10, 14, 0),
+    endDate: new Date(2021, 4, 10, 18, 0),
+    ownerId: 2,
+  },
+  {
+    id: 2,
+    title: "Zelong Wang",
+    startDate: new Date(2021, 4, 11, 8, 0),
+    endDate: new Date(2021, 4, 11, 12, 0),
+    ownerId: 3,
+  },
+  {
+    id: 3,
+    title: "YUN-TUNG SHIH",
+    startDate: new Date(2021, 4, 11, 14, 0),
+    endDate: new Date(2021, 4, 11, 18, 0),
+    ownerId: 4,
+  },
+  {
+    id: 4,
+    title: "Jiahao Ai",
+    startDate: new Date(2021, 4, 12, 8, 0),
+    endDate: new Date(2021, 4, 12, 12, 0),
+    ownerId: 5,
+  },
+  {
+    id: 5,
+    title: "Jiahao Xu",
+    startDate: new Date(2021, 4, 12, 14, 0),
+    endDate: new Date(2021, 4, 12, 18, 0),
+    ownerId: 6,
+  },
+  {
+    id: 2,
+    title: "Tianqi Liao",
+    startDate: new Date(2021, 4, 13, 8, 0),
+    endDate: new Date(2021, 4, 13, 12, 0),
+    ownerId: 1,
+  },
+  {
+    id: 3,
+    title: "Zelong Wang",
+    startDate: new Date(2021, 4, 13, 14, 0),
+    endDate: new Date(2021, 4, 13, 18, 0),
+    ownerId: 3,
+  },
+  {
+    id: 4,
+    title: "Shuhao Liao",
+    startDate: new Date(2021, 4, 14, 8, 0),
+    endDate: new Date(2021, 4, 14, 12, 0),
+    ownerId: 2,
+  },
+  {
+    id: 5,
+    title: "YUN-TUNG SHIH",
+    startDate: new Date(2021, 4, 14, 14, 0),
+    endDate: new Date(2021, 4, 14, 18, 0),
+    ownerId: 4,
+  },
+  // {
+  //   id: 5,
+  //   title: "6",
+  //   startDate: new Date(2021, 4, 5, 14, 0),
+  //   endDate: new Date(2021, 4, 5, 18, 0),
+  //   rRule: "FREQ=WEEKLY;BYDAY=FR;UNTIL=20210814",
+  //   exDate: "20210713T100000Z,20210727T100000Z",
+  //   ownerId: 2,
+  // },
+  // {
+  //   id: 6,
+  //   title: "7",
+  //   startDate: new Date(2021, 4, 28, 12, 0),
+  //   endDate: new Date(2021, 4, 28, 12, 30),
+  //   rRule: "FREQ=WEEKLY;BYDAY=TH;UNTIL=20210727",
+  //   exDate: "20210704T090000Z,20210719T090000Z",
+  //   ownerId: 4,
+  // },
+  // {
+  //   id: 7,
+  //   title: "8",
+  //   startDate: new Date(2021, 4, 3, 11, 0),
+  //   endDate: new Date(2021, 4, 3, 12, 0),
+  //   rRule: "FREQ=WEEKLY;BYDAY=TU;UNTIL=20210801",
+  //   exDate: "20210710T080000Z,20210724T080000Z",
+  //   ownerId: 3,
+  // },
+];
+
+const resources = [
+  {
+    fieldName: "ownerId",
+    title: "Owners",
+    instances: owners,
+  },
+];
+
+const getBorder = (theme) =>
+  `1px solid ${
+    theme.palette.type === "light"
+      ? lighten(fade(theme.palette.divider, 1), 0.88)
+      : darken(fade(theme.palette.divider, 1), 0.48)
+  }`;
+
+const DayScaleCell = (props) => (
+  <MonthView.DayScaleCell
+    {...props}
+    style={{ textAlign: "center", fontWeight: "bold" }}
+  />
+);
+
+
 
 // #FOLD_BLOCK
 const CellBase = React.memo(
@@ -281,7 +318,7 @@ const CellBase = React.memo(
         })}
       >
         <div className={classes.content}>
-          <WeatherIcon classes={classes} id={iconId} />
+          {/* <WeatherIcon classes={classes} id={iconId} /> */}
         </div>
         <div className={classes.text}>
           {formatDate(startDate, formatOptions)}
@@ -308,20 +345,21 @@ const AppointmentContent = withStyles(styles, { name: "AppointmentContent" })(
   )
 );
 
+// right corner LOGO and Company Name
 const FlexibleSpace = withStyles(styles, { name: "ToolbarRoot" })(
   ({ classes, ...restProps }) => (
     <Toolbar.FlexibleSpace {...restProps} className={classes.flexibleSpace}>
       <div className={classes.flexContainer}>
-        <ColorLens fontSize="large" htmlColor="#FF7043" />
-        <Typography variant="h5" style={{ marginLeft: "10px" }}>
-          Art School
+        {/* <ColorLens fontSize="large" htmlColor="#FF7043" /> logo*/}
+        <Typography variant="h4" style={{ marginLeft: "10px" }}>
+          SEPM-MC3-1
         </Typography>
       </div>
     </Toolbar.FlexibleSpace>
   )
 );
 
-class Demo extends React.PureComponent {
+class ManagerShift extends React.PureComponent {
   // #FOLD_BLOCK
   constructor(props) {
     super(props);
@@ -333,7 +371,7 @@ class Demo extends React.PureComponent {
     this.commitChanges = this.commitChanges.bind(this);
   }
 
-  // #FOLD_BLOCK
+  // put axios in here
   commitChanges({ added, changed, deleted }) {
     this.setState((state) => {
       let { data } = state;
@@ -341,6 +379,7 @@ class Demo extends React.PureComponent {
         const startingAddedId =
           data.length > 0 ? data[data.length - 1].id + 1 : 0;
         data = [...data, { id: startingAddedId, ...added }];
+        console.log(data,"add");
       }
       if (changed) {
         data = data.map((appointment) =>
@@ -348,13 +387,17 @@ class Demo extends React.PureComponent {
             ? { ...appointment, ...changed[appointment.id] }
             : appointment
         );
+        console.log(data,"change");
       }
       if (deleted !== undefined) {
         data = data.filter((appointment) => appointment.id !== deleted);
+        console.log(data,"deleted");
       }
       return { data };
     });
   }
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 
   render() {
     const { data } = this.state;
@@ -363,20 +406,24 @@ class Demo extends React.PureComponent {
       <Paper>
         <Scheduler data={data}>
           <EditingState onCommitChanges={this.commitChanges} />
-          <ViewState defaultCurrentDate="2018-07-17" />
-
+          <ViewState defaultCurrentDate={Date()} />
+          <WeekView
+            startDayHour={8}
+            endDayHour={18}
+          />
           <MonthView
-            timeTableCellComponent={TimeTableCell}
+            // timeTableCellComponent={TimeTableCell} display color for every day
             dayScaleCellComponent={DayScaleCell}
           />
-
+         
           <Appointments
-            appointmentComponent={Appointment}
+            appointmentComponent={Appointment} //css style
             appointmentContentComponent={AppointmentContent}
           />
           <Resources data={resources} />
 
           <Toolbar flexibleSpaceComponent={FlexibleSpace} />
+          <ViewSwitcher />
           <DateNavigator />
 
           <EditRecurrenceMenu />
@@ -389,4 +436,4 @@ class Demo extends React.PureComponent {
   }
 }
 
-export default Demo;
+export default ManagerShift;

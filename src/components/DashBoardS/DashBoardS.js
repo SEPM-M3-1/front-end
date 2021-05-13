@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 // import ShiftTable from "./components/ShiftTable/ShiftTable";
 // import Calendar from "./components/ShiftTable/Calendar";
-import Demo from "./components/ShiftTable/Calendar";
+import StaffShift from "./components/StaffShift";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -78,7 +78,7 @@ export default function SimpleTabs() {
       </AppBar>
       <TabPanel value={value} index={0}>
         {/* <ShiftTable /> */}
-        <Demo />
+        <StaffShift />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <ProfileS />
