@@ -378,8 +378,13 @@ class ManagerShift extends React.PureComponent {
       if (added) {
         const startingAddedId =
           data.length > 0 ? data[data.length - 1].id + 1 : 0;
-        data = [...data, { id: startingAddedId, ...added }];
-        console.log(data,"add");
+        data = [...data, { id: startingAddedId, ...added }].slice(-1);
+        const id = data[0].id;
+        const title = data[0].title;
+        const startDate = data[0].startDate.getTime();
+        const endDate = data[0].endDate.getTime();
+        const ownerId = data[0].ownerId;
+        console.log(id, title, startDate,endDate, ownerId, "add");
       }
       if (changed) {
         data = data.map((appointment) =>
@@ -387,7 +392,12 @@ class ManagerShift extends React.PureComponent {
             ? { ...appointment, ...changed[appointment.id] }
             : appointment
         );
-        console.log(data,"change");
+        const id = data[0].id;
+        const title = data[0].title;
+        const startDate = data[0].startDate.getTime();
+        const endDate = data[0].endDate.getTime();
+        const ownerId = data[0].ownerId;
+        console.log(id, title, startDate,endDate, ownerId,"change");
       }
       if (deleted !== undefined) {
         data = data.filter((appointment) => appointment.id !== deleted);
