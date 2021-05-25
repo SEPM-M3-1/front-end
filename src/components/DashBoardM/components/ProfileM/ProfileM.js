@@ -6,13 +6,13 @@ import * as Yup from "yup";
 import Button from "@material-ui/core/Button";
 import "./ProfileM.css";
 
-const ProfileM = ({ email }) => {
+const ProfileM = () => {
   const history = useHistory();
 
   const [mProfile, setMProfile] = useState({
     fullName: " ",
     phone: " ",
-    email: " ",
+    email: "",
   });
 
   const [warning, setWarning] = useState({
@@ -31,6 +31,7 @@ const ProfileM = ({ email }) => {
   }, []);
 
   const getMprofile = async () => {
+    const email = localStorage.getItem("email");
     try {
       const getMprofileResponse = await api.fetchManagerProfileByEmail({
         email,
@@ -41,7 +42,9 @@ const ProfileM = ({ email }) => {
           phone: getMprofileResponse.data.phone,
           email: getMprofileResponse.data.email,
         });
+        console.log(getMprofileResponse.data);
       }
+      console.log(mProfile);
     } catch (error) {
       setWarning({
         show: true,

@@ -25,12 +25,13 @@ const Login = () => {
 
   const onSubmit = async ({ email, password, type }) => {
     localStorage.setItem("email", email);
-    console.log(email, password, type);
     try {
       const loginRes = await api.login({ email, password, type });
       if (loginRes.status === 200) {
+        console.log(email, password, type);
+
         localStorage.setItem("id", loginRes.data.id);
-        localStorage.setItem("name", localStorage.data.fullName);
+        localStorage.setItem("name", loginRes.data.fullName);
         if (type === "Staff") {
           history.push("/dashboards");
         }

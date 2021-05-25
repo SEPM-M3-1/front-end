@@ -99,7 +99,15 @@ export const fetchStaffProfileByEmail = ({ email }) =>
     },
   });
 
-export const changeStaffProfile = ({ id, fullName, phone, email, hourLimits, address, preferredName }) =>
+export const changeStaffProfile = ({
+  id,
+  fullName,
+  phone,
+  email,
+  hourLimits,
+  address,
+  preferredName,
+}) =>
   axios({
     method: "put",
     url: `${baseUrl}/staffprofile/change`,
@@ -123,13 +131,10 @@ export const getAllManagers = (type) =>
     },
   });
 
-export const getAllStaffs = (type) =>
+export const getAllStaffs = () =>
   axios({
     method: "get",
-    url: `${baseUrl}/allstaffs`,
-    params: {
-      type,
-    },
+    url: `${baseUrl}/allstaff`,
   });
 
 export const changeHours = (email, hours) =>
@@ -142,7 +147,7 @@ export const changeHours = (email, hours) =>
     },
   });
 
-  export const getNotification = (email) =>
+export const getNotification = (email) =>
   axios({
     method: "get",
     url: `${baseUrl}/notification/${email}`,
