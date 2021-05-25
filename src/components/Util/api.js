@@ -16,7 +16,7 @@ export const login = ({ email, password, type }) =>
 export const sigunm = ({ email, fullName, password, mobile }) =>
   axios({
     method: "post",
-    url: `${baseUrl}/signupm`,
+    url: `${baseUrl}/signup`,
     params: {
       email,
       fullName,
@@ -36,7 +36,7 @@ export const siguns = ({
 }) =>
   axios({
     method: "post",
-    url: `${baseUrl}/signups`,
+    url: `${baseUrl}/registration`,
     params: {
       email,
       fullName,
@@ -62,7 +62,7 @@ export const changeMprofile = ({ fullName, phoneNum, email }) =>
 export const ChangePassword = ({ type, id, oldPassword, password }) =>
   axios({
     method: "put",
-    url: `${baseUrl}/Changepasswords`,
+    url: `${baseUrl}/passwordreset`,
     params: {
       type,
       id,
