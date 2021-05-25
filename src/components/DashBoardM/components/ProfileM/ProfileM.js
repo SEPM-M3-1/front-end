@@ -10,9 +10,9 @@ const ProfileM = ({ email }) => {
   const history = useHistory();
 
   const [mProfile, setMProfile] = useState({
-    fullName: "Full Name",
-    phoneNum: "0481-111-111",
-    email: "init@test.com",
+    fullName: " ",
+    phone: " ",
+    email: " ",
   });
 
   const [warning, setWarning] = useState({
@@ -32,13 +32,13 @@ const ProfileM = ({ email }) => {
 
   const getMprofile = async () => {
     try {
-      const getMprofileResponse = await api.getMprofile({
+      const getMprofileResponse = await api.fetchManagerProfileByEmail({
         email,
       });
       if (getMprofileResponse.status === 200) {
         setMProfile({
           fullName: getMprofileResponse.data.fullName,
-          phoneNum: getMprofileResponse.data.phoneNum,
+          phone: getMprofileResponse.data.phone,
           email: getMprofileResponse.data.email,
         });
       }
@@ -54,13 +54,14 @@ const ProfileM = ({ email }) => {
     setShowPasswordForm(!showPasswordForm);
   };
 
-  const onSubmit = async ({ fullName, phoneNum, email }) => {
-    console.log(fullName, phoneNum, email);
-
+  const onSubmit = async ({ fullName, phone, email }) => {
+    console.log(fullName, phone, email);
+    const id = localStorage.getItem("id");
     try {
-      const mprofileResponse = await api.changeMprofile({
+      const mprofileResponse = await api.changeManagerProfile({
+        id,
         fullName,
-        phoneNum,
+        phone,
         email,
       });
       if (mprofileResponse.status === 200) {
@@ -168,21 +169,21 @@ const ProfileM = ({ email }) => {
               </div>
 
               <label
-                htmlFor="phoneNum"
+                htmlFor="phone"
                 style={{ display: "block" }}
                 className="itemLabel"
               >
                 Phone Number
               </label>
               <Field
-                label="phoneNum"
-                id="phoneNum"
-                type="phoneNum"
-                name="phoneNum"
-                autoComplete="phoneNum"
+                label="phone"
+                id="phone"
+                type="phone"
+                name="phone"
+                autoComplete="phone"
               />
               <div>
-                <ErrorMessage name="phoneNum">
+                <ErrorMessage name="phone">
                   {(msg) => <span className="error">{msg}</span>}
                 </ErrorMessage>
               </div>

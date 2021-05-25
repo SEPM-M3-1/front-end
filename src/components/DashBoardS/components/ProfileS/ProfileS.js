@@ -10,12 +10,13 @@ const ProfileS = ({ email }) => {
   const history = useHistory();
 
   const [sProfile, setSProfile] = useState({
-    fullName: "Full Name",
-    phoneNum: "0481-111-111",
-    timeLimit: "4 hours",
-    homeAddress: "address",
-    preferName: "prefer Name",
-    email: "init@test.com",
+    fullName: " ",
+    phone: " ",
+    hourLimits: " ",
+    address: " ",
+    preferredName: "",
+    email: " ",
+    address: " ",
   });
 
   const [warning, setWarning] = useState({
@@ -41,11 +42,11 @@ const ProfileS = ({ email }) => {
       if (getSprofileResponse.status === 200) {
         setSProfile({
           fullName: getSprofileResponse.data.fullName,
-          phoneNum: getSprofileResponse.data.phoneNum,
+          phone: getSprofileResponse.data.phone,
           email: getSprofileResponse.data.email,
-          timeLimit: getSprofileResponse.data.timeLimit,
-          homeAddress: getSprofileResponse.data.homeAddress,
-          preferName: getSprofileResponse.data.preferName,
+          hourLimits: getSprofileResponse.data.hourLimits,
+          address: getSprofileResponse.data.address,
+          preferredName: getSprofileResponse.data.preferredName,
         });
       }
     } catch (error) {
@@ -62,31 +63,33 @@ const ProfileS = ({ email }) => {
 
   const onSubmit = async ({
     fullName,
-    phoneNum,
+    phone,
     email,
-    timeLimit,
-    homeAddress,
-    preferName,
+    hourLimits,
+    address,
+    preferredName,
   }) => {
-    console.log(fullName, phoneNum, email);
-
+    console.log(fullName, phone, email);
+    const id = localStorage.getItem("id");
     try {
       const sProfileResponse = await api.changeStaffProfile({
+        id,
         fullName,
-        phoneNum,
+        phone,
         email,
-        timeLimit,
-        homeAddress,
-        preferName,
+        hourLimits,
+        address,
+        preferredName,
       });
       if (sProfileResponse.status === 200) {
         setSProfile({
           fullName: sProfileResponse.data.fullName,
-          phoneNum: sProfileResponse.data.phoneNum,
+          phone: sProfileResponse.data.phone,
           email: sProfileResponse.data.email,
-          timeLimit: sProfileResponse.data.timeLimit,
-          homeAddress: sProfileResponse.data.homeAddress,
-          preferName: sProfileResponse.data.preferName,
+          hourLimits: sProfileResponse.data.hourLimits,
+          address: sProfileResponse.data.address,
+          preferredName: sProfileResponse.data.preferredName,
+          address: sProfileResponse.data.address,
         });
         setWarning({
           show: true,
@@ -167,7 +170,7 @@ const ProfileS = ({ email }) => {
               </ErrorMessage>
 
               <label
-                htmlFor="timeLimit"
+                htmlFor="hourLimits"
                 style={{ display: "block" }}
                 className="itemLabel"
               >
@@ -175,49 +178,49 @@ const ProfileS = ({ email }) => {
               </label>
               <Field
                 disabled="true"
-                label="timeLimit"
-                name="timeLimit"
-                id="timeLimit"
+                label="hourLimits"
+                name="hourLimits"
+                id="hourLimits"
                 autoFocus
-                autoComplete="timeLimit"
+                autoComplete="hourLimits"
               />
-              <ErrorMessage name="timeLimit">
+              <ErrorMessage name="hourLimits">
                 {(msg) => <span className="error">{msg}</span>}
               </ErrorMessage>
 
               <label
-                htmlFor="preferName"
+                htmlFor="preferredName"
                 style={{ display: "block" }}
                 className="itemLabel"
               >
                 Preferred Name
               </label>
               <Field
-                label="preferName"
-                name="preferName"
-                id="preferName"
+                label="preferredName"
+                name="preferredName"
+                id="preferredName"
                 autoFocus
-                autoComplete="preferName"
+                autoComplete="preferredName"
               />
-              <ErrorMessage name="preferName">
+              <ErrorMessage name="preferredName">
                 {(msg) => <span className="error">{msg}</span>}
               </ErrorMessage>
 
               <label
-                htmlFor="homeAddress"
+                htmlFor="address"
                 style={{ display: "block" }}
                 className="itemLabel"
               >
                 Home Address
               </label>
               <Field
-                label="homeAddress"
-                name="homeAddress"
-                id="homeAddress"
+                label="address"
+                name="address"
+                id="address"
                 autoFocus
-                autoComplete="homeAddress"
+                autoComplete="address"
               />
-              <ErrorMessage name="homeAddress">
+              <ErrorMessage name="address">
                 {(msg) => <span className="error">{msg}</span>}
               </ErrorMessage>
 
@@ -242,24 +245,25 @@ const ProfileS = ({ email }) => {
               </div>
 
               <label
-                htmlFor="phoneNum"
+                htmlFor="phone"
                 style={{ display: "block" }}
                 className="itemLabel"
               >
                 Phone Number
               </label>
               <Field
-                label="phoneNum"
-                id="phoneNum"
-                type="phoneNum"
-                name="phoneNum"
-                autoComplete="phoneNum"
+                label="phone"
+                id="phone"
+                type="phone"
+                name="phone"
+                autoComplete="phone"
               />
               <div>
-                <ErrorMessage name="phoneNum">
+                <ErrorMessage name="phone">
                   {(msg) => <span className="error">{msg}</span>}
                 </ErrorMessage>
               </div>
+              
 
               <div className="itemLabel">
                 <Button

@@ -26,15 +26,11 @@ const Login = () => {
   const onSubmit = async ({ email, password, type }) => {
     localStorage.setItem("email", email);
     console.log(email, password, type);
-    // if (type === "staff") {
-    //   history.push("/dashboards");
-    // }
-    // if (type === "manager") {
-    //   history.push("/dashboardm");
-    // }
     try {
       const loginRes = await api.login({ email, password, type });
       if (loginRes.status === 200) {
+        localStorage.setItem("id", loginRes.data.id);
+        localStorage.setItem("name", localStorage.data.fullName);
         if (type === "Staff") {
           history.push("/dashboards");
         }

@@ -69,21 +69,22 @@ export const setAvailableTime = ({ ownerId, endDate, startDate }) =>
     },
   });
 
-export const changeMprofile = ({ fullName, phoneNum, email }) =>
+export const changeManagerProfile = ({ id, fullName, phone, email }) =>
   axios({
     method: "put",
-    url: `${baseUrl}/changemprofiles`,
+    url: `${baseUrl}/managerprofile`,
     data: {
+      id,
       email,
       fullName,
-      phoneNum,
+      phone,
     },
   });
 
-export const getMprofile = ({ email }) =>
+export const fetchManagerProfileByEmail = ({ email }) =>
   axios({
     method: "get",
-    url: `${baseUrl}/getmprofile`,
+    url: `${baseUrl}/managerprofile`,
     params: {
       email,
     },
@@ -98,18 +99,50 @@ export const fetchStaffProfileByEmail = ({ email }) =>
     },
   });
 
-export const changeSprofile = ({ fullName, phoneNum, email }) =>
+export const changeStaffProfile = ({ id, fullName, phone, email, hourLimits, address, preferredName }) =>
   axios({
     method: "put",
-    url: `${baseUrl}//staffprofile/change`,
-    params: {
-      email,
+    url: `${baseUrl}/staffprofile/change`,
+    data: {
+      id,
       fullName,
-      phoneNum,
+      phone,
+      email,
+      hourLimits,
+      address,
+      preferredName,
     },
   });
 
-export const getNotification = (email) =>
+export const getAllManagers = (type) =>
+  axios({
+    method: "get",
+    url: `${baseUrl}/allmanagers`,
+    params: {
+      type,
+    },
+  });
+
+export const getAllStaffs = (type) =>
+  axios({
+    method: "get",
+    url: `${baseUrl}/allstaffs`,
+    params: {
+      type,
+    },
+  });
+
+export const changeHours = (email, hours) =>
+  axios({
+    method: "put",
+    url: `${baseUrl}/newLimitHours`,
+    data: {
+      email,
+      hours,
+    },
+  });
+
+  export const getNotification = (email) =>
   axios({
     method: "get",
     url: `${baseUrl}/notification/${email}`,
@@ -124,33 +157,5 @@ export const refuse = ({ email, fullName, startTime, endTime }) =>
       fullName,
       startTime,
       endTime,
-    },
-  });
-
-export const getAllManagers = (type) =>
-  axios({
-    method: "get",
-    url: `${baseUrl}/all-managers`,
-    params: {
-      type,
-    },
-  });
-
-export const getAllStaffs = (type) =>
-  axios({
-    method: "get",
-    url: `${baseUrl}/all-staffs`,
-    params: {
-      type,
-    },
-  });
-
-export const changeHours = (email, hours) =>
-  axios({
-    method: "put",
-    url: `${baseUrl}/newLimitHours`,
-    data: {
-      email,
-      hours,
     },
   });
