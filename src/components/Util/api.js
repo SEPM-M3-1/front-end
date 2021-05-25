@@ -4,58 +4,45 @@ const baseUrl = "http://localhost:8080";
 
 export const login = ({ email, password, type }) =>
   axios({
-    method: "get",
+    method: "post",
     url: `${baseUrl}/login`,
-    params: {
+    data: {
       email,
       password,
       type,
     },
   });
 
-export const sigunm = ({ email, fullName, password, mobile }) =>
+export const sigunm = ({ email, fullName, password, phone }) =>
   axios({
     method: "post",
     url: `${baseUrl}/signup`,
-    params: {
+    data: {
       email,
       fullName,
       password,
-      mobile,
+      phone,
     },
   });
 
-export const siguns = ({
+export const signups = ({
   email,
   fullName,
   password,
-  mobile,
+  phone,
   address,
-  workingHours,
-  preferredName,
+  hourLimits,
 }) =>
   axios({
     method: "post",
     url: `${baseUrl}/registration`,
-    params: {
+    data: {
       email,
       fullName,
       password,
-      mobile,
+      phone,
       address,
-      workingHours,
-      preferredName,
-    },
-  });
-
-export const changeMprofile = ({ fullName, phoneNum, email }) =>
-  axios({
-    method: "put",
-    url: `${baseUrl}/changemprofiles`,
-    params: {
-      email,
-      fullName,
-      phoneNum,
+      hourLimits,
     },
   });
 
@@ -63,11 +50,33 @@ export const ChangePassword = ({ type, id, oldPassword, password }) =>
   axios({
     method: "put",
     url: `${baseUrl}/passwordreset`,
-    params: {
+    data: {
       type,
       id,
       oldPassword,
       password,
+    },
+  });
+
+export const setAvailableTime = ({ ownerId, endDate, startDate }) =>
+  axios({
+    method: "post",
+    url: `${baseUrl}/staff/${ownerId}/settime`,
+    data: {
+      ownerId,
+      endDate,
+      startDate,
+    },
+  });
+
+export const changeMprofile = ({ fullName, phoneNum, email }) =>
+  axios({
+    method: "put",
+    url: `${baseUrl}/changemprofiles`,
+    data: {
+      email,
+      fullName,
+      phoneNum,
     },
   });
 
@@ -80,10 +89,10 @@ export const getMprofile = ({ email }) =>
     },
   });
 
-export const getSprofile = ({ email }) =>
+export const fetchStaffProfileByEmail = ({ email }) =>
   axios({
     method: "get",
-    url: `${baseUrl}/getmprofile`,
+    url: `${baseUrl}/staffprofile`,
     params: {
       email,
     },
@@ -92,7 +101,7 @@ export const getSprofile = ({ email }) =>
 export const changeSprofile = ({ fullName, phoneNum, email }) =>
   axios({
     method: "put",
-    url: `${baseUrl}/changemprofiles`,
+    url: `${baseUrl}//staffprofile/change`,
     params: {
       email,
       fullName,
@@ -106,16 +115,17 @@ export const getNotification = (email) =>
     url: `${baseUrl}/notification/${email}`,
   });
 
-export const refuse = ({ email, fullName, startTime, endTime }) => axios({
-  method: "delete",
-  url: `${baseUrl}/refuse`,
-  data: {
-    email,
-    fullName,
-    startTime,
-    endTime,
-  }
-})
+export const refuse = ({ email, fullName, startTime, endTime }) =>
+  axios({
+    method: "delete",
+    url: `${baseUrl}/refuse`,
+    data: {
+      email,
+      fullName,
+      startTime,
+      endTime,
+    },
+  });
 
 export const getAllManagers = (type) =>
   axios({
@@ -135,14 +145,12 @@ export const getAllStaffs = (type) =>
     },
   });
 
-export const changeHours = (email, hours) => axios({
-  method: 'put',
-  url: `${baseUrl}/newLimitHours`,
-  data: {
-    email,
-    hours
-  }
-})
-
-
-
+export const changeHours = (email, hours) =>
+  axios({
+    method: "put",
+    url: `${baseUrl}/newLimitHours`,
+    data: {
+      email,
+      hours,
+    },
+  });

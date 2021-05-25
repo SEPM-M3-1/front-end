@@ -35,7 +35,7 @@ const ProfileS = ({ email }) => {
 
   const getSprofile = async () => {
     try {
-      const getSprofileResponse = await api.getSprofile({
+      const getSprofileResponse = await api.fetchStaffProfileByEmail({
         email,
       });
       if (getSprofileResponse.status === 200) {
@@ -71,7 +71,7 @@ const ProfileS = ({ email }) => {
     console.log(fullName, phoneNum, email);
 
     try {
-      const sProfileResponse = await api.changeSprofile({
+      const sProfileResponse = await api.changeStaffProfile({
         fullName,
         phoneNum,
         email,
@@ -117,10 +117,12 @@ const ProfileS = ({ email }) => {
         history.push("/login");
       }
     } catch (error) {
-      setPasswordWarning({
-        show: true,
-        info: "Password Change Failed!",
-      });
+      if (error.response.status === 400) {
+        setPasswordWarning({
+          show: true,
+          info: "Password Change Failed!",
+        });
+      }
     }
   };
 

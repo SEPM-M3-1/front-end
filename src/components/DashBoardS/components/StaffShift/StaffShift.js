@@ -29,6 +29,7 @@ import {
 // import ColorLens from "@material-ui/icons/ColorLens";
 import { withStyles } from "@material-ui/core/styles";
 import { owners } from "./tasks";
+import * as api from "../../../Util/api";
 
 // Start Style
 const styles = (theme) => ({
@@ -155,13 +156,13 @@ const WeatherIcon = ({ classes, id }) => {
   switch (id) {
     case 0:
       return null;
-      // return <Opacity className={classes.rain} fontSize="large" />;
+    // return <Opacity className={classes.rain} fontSize="large" />;
     case 1:
       return null;
-      // return <WbSunny className={classes.sun} fontSize="large" />;
+    // return <WbSunny className={classes.sun} fontSize="large" />;
     case 2:
       return null;
-      // return <FilterDrama className={classes.cloud} fontSize="large" />;
+    // return <FilterDrama className={classes.cloud} fontSize="large" />;
     default:
       return null;
   }
@@ -169,20 +170,20 @@ const WeatherIcon = ({ classes, id }) => {
 
 // use axios in here to acquire these data
 const appointments = [
-  {
-    id: 0,
-    title: "Tianqi Liao",
-    startDate: new Date(2021, 4, 10, 8, 0),
-    endDate: new Date(2021, 4, 10, 12, 0),
-    ownerId: 1,
-  },
-  {
-    id: 2,
-    title: "Tianqi Liao",
-    startDate: new Date(2021, 4, 13, 8, 0),
-    endDate: new Date(2021, 4, 13, 12, 0),
-    ownerId: 1,
-  },
+  // {
+  //   id: 0,
+  //   title: "Tianqi Liao",
+  //   startDate: new Date(2021, 4, 10, 8, 0),
+  //   endDate: new Date(2021, 4, 10, 12, 0),
+  //   ownerId: 1,
+  // },
+  // {
+  //   id: 2,
+  //   title: "Tianqi Liao",
+  //   startDate: new Date(2021, 4, 13, 8, 0),
+  //   endDate: new Date(2021, 4, 13, 12, 0),
+  //   ownerId: 1,
+  // },
   // {
   //   id: 7,
   //   title: "8",
@@ -215,8 +216,6 @@ const DayScaleCell = (props) => (
     style={{ textAlign: "center", fontWeight: "bold" }}
   />
 );
-
-
 
 // #FOLD_BLOCK
 const CellBase = React.memo(
@@ -305,7 +304,28 @@ class StaffShift extends React.PureComponent {
         const startingAddedId =
           data.length > 0 ? data[data.length - 1].id + 1 : 0;
         data = [...data, { id: startingAddedId, ...added }];
-        console.log(data,"add");
+        console.log(data, "add");
+        const id = data[0].id;
+        const title = data[0].title;
+        const startDate = data[0].startDate.getTime();
+        const endDate = data[0].endDate.getTime();
+        const ownerId = data[0].ownerId;
+        console.log(id, title, startDate, endDate, ownerId, "add");
+
+        try {
+          const availableTimeResponse = api.setAvailableTime({
+            ownerId,
+            endDate,
+            startDate,
+          });
+          if (availableTimeResponse.status === 200) {
+            alert("set time successful!");
+          }
+        } catch (error) {
+          if (error.response.status === 400) {
+            alert("set time fail!");
+          }
+        }
       }
       if (changed) {
         data = data.map((appointment) =>
@@ -313,17 +333,17 @@ class StaffShift extends React.PureComponent {
             ? { ...appointment, ...changed[appointment.id] }
             : appointment
         );
-        console.log(data,"change");
+        console.log(data, "change");
       }
       if (deleted !== undefined) {
         data = data.filter((appointment) => appointment.id !== deleted);
-        console.log(data,"deleted");
+        console.log(data, "deleted");
       }
       return { data };
     });
   }
-//////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
 
   render() {
     const { data } = this.state;
@@ -333,15 +353,12 @@ class StaffShift extends React.PureComponent {
         <Scheduler data={data}>
           <EditingState onCommitChanges={this.commitChanges} />
           <ViewState defaultCurrentDate={Date()} />
-          <WeekView
-            startDayHour={8}
-            endDayHour={18}
-          />
+          <WeekView startDayHour={8} endDayHour={18} />
           <MonthView
             // timeTableCellComponent={TimeTableCell} display color for every day
             dayScaleCellComponent={DayScaleCell}
           />
-         
+
           <Appointments
             appointmentComponent={Appointment} //css style
             appointmentContentComponent={AppointmentContent}

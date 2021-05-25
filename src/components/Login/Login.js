@@ -26,19 +26,19 @@ const Login = () => {
   const onSubmit = async ({ email, password, type }) => {
     localStorage.setItem("email", email);
     console.log(email, password, type);
-    if (type === "staff") {
-      history.push("/dashboards");
-    }
-    if (type === "manager") {
-      history.push("/dashboardm");
-    }
+    // if (type === "staff") {
+    //   history.push("/dashboards");
+    // }
+    // if (type === "manager") {
+    //   history.push("/dashboardm");
+    // }
     try {
       const loginRes = await api.login({ email, password, type });
       if (loginRes.status === 200) {
-        if (type === "staff") {
+        if (type === "Staff") {
           history.push("/dashboards");
         }
-        if (type === "manager") {
+        if (type === "Manager") {
           history.push("/dashboardm");
         }
       }
@@ -69,8 +69,8 @@ const Login = () => {
             </label>
             <Field as="select" name="type">
               <option>Select Your Type</option>
-              <option value="staff">Staff</option>
-              <option value="manager">Manager</option>
+              <option value="Staff">Staff</option>
+              <option value="Manager">Manager</option>
             </Field>
             <label htmlFor="email" style={{ display: "block" }}>
               Email
@@ -83,7 +83,11 @@ const Login = () => {
               autoComplete="email"
             />
             <ErrorMessage name="email">
-              {(msg) => <span className="error"style={{ display: "block" }} >{msg}</span>}
+              {(msg) => (
+                <span className="error" style={{ display: "block" }}>
+                  {msg}
+                </span>
+              )}
             </ErrorMessage>
             <label htmlFor="password" style={{ display: "block" }}>
               Password
@@ -96,16 +100,25 @@ const Login = () => {
               autoComplete="password"
             />
             <ErrorMessage name="password">
-              {(msg) => <span className="error" style={{ display: "block" }} >{msg}</span>}
+              {(msg) => (
+                <span className="error" style={{ display: "block" }}>
+                  {msg}
+                </span>
+              )}
             </ErrorMessage>
             <button
               type="submit"
               disabled={isSubmitting}
-              style={{ display: "block", margin:"auto"}}
+              style={{ display: "block", margin: "auto" }}
             >
               Sign in
             </button>
-            <Link id="signUpLink" className="link" to="/signupm" style={{ display: "block", margin:"auto"}}>
+            <Link
+              id="signUpLink"
+              className="link"
+              to="/signupm"
+              style={{ display: "block", margin: "auto" }}
+            >
               SignUp
             </Link>
           </Form>

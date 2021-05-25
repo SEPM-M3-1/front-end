@@ -1,11 +1,8 @@
-import React,{useState} from 'react';
-import { Formik,Field,ErrorMessage,Form } from 'formik';
-import * as Yup from 'yup';
-import {
-  Link,
-  useHistory,
-} from 'react-router-dom';
-import * as api from '../Util/api';
+import React, { useState } from "react";
+import { Formik, Field, ErrorMessage, Form } from "formik";
+import * as Yup from "yup";
+import { Link, useHistory } from "react-router-dom";
+import * as api from "../Util/api";
 
 const SignUpM = () => {
   const history = useHistory();
@@ -13,41 +10,46 @@ const SignUpM = () => {
   const [warning, setWarning] = useState(false);
 
   const initialValues = {
-    email: '',
-    fullName:'',
-    password: '',
-    mobile:'',
-  }
+    email: "",
+    fullName: "",
+    password: "",
+    mobile: "",
+  };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Please enter valid email').required('Email Required!'),
-    fullName: Yup.string().required('FullName Required!'),
-    password: Yup.string().required('Password Required!')
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8})/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
-    ),
-    mobile: Yup.string().required('Mobile Required!')
-  })
+    email: Yup.string()
+      .email("Please enter valid email")
+      .required("Email Required!"),
+    fullName: Yup.string().required("FullName Required!"),
+    password: Yup.string()
+      .required("Password Required!")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8})/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      ),
+    phone: Yup.string().required("Mobile Required!"),
+  });
 
-  const onSubmit = async ({ email, fullName, password, mobile }) => {
-    console.log(email, fullName, password, mobile);
+  const onSubmit = async ({ email, fullName, password, phone }) => {
+    console.log(email, fullName, password, phone);
     try {
-      const signupRes = await api.sigunm({ email, fullName, password, mobile })
+      const signupRes = await api.sigunm({ email, fullName, password, phone });
       if (signupRes.status === 200) {
-        history.push('/login');
+        history.push("/login");
       }
     } catch (error) {
       if (error.response.status === 400) {
         setWarning(true);
       }
     }
-  }
+  };
 
   return (
     <div className="signup_form">
-      <h1 style={{display: "block"}}>Manager SignUp</h1>
-      {warning? <span style={{color:"red"}}>Email already exist</span> :null}
+      <h1 style={{ display: "block" }}>Manager SignUp</h1>
+      {warning ? (
+        <span style={{ color: "red" }}>Email already exist</span>
+      ) : null}
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -66,7 +68,7 @@ const SignUpM = () => {
               autoComplete="email"
             />
             <ErrorMessage name="email">
-            { (msg) => <span className="error">{msg}</span>}
+              {(msg) => <span className="error">{msg}</span>}
             </ErrorMessage>
             <label htmlFor="full-name" style={{ display: "block" }}>
               Full Name
@@ -79,7 +81,7 @@ const SignUpM = () => {
               autoComplete="fullName"
             />
             <ErrorMessage name="fullName">
-            { (msg) => <span className="error">{msg}</span>}
+              {(msg) => <span className="error">{msg}</span>}
             </ErrorMessage>
             <label htmlFor="password" style={{ display: "block" }}>
               Password
@@ -92,21 +94,21 @@ const SignUpM = () => {
               autoComplete="password"
             />
             <ErrorMessage name="password">
-            { (msg) => <span className="error">{msg}</span>}
+              {(msg) => <span className="error">{msg}</span>}
             </ErrorMessage>
             <label htmlFor="mobile" style={{ display: "block" }}>
               Mobile Number
             </label>
             <Field
               label="mobile number"
-              id="mobile"
-              type="mobile"
-              name="mobile"
-              autoComplete="mobile"
+              id="phone"
+              type="phone"
+              name="phone"
+              autoComplete="phone"
             />
-            <ErrorMessage name="mobile">
-            { (msg) => <span className="error">{msg}</span>}
-             </ErrorMessage>
+            <ErrorMessage name="phone">
+              {(msg) => <span className="error">{msg}</span>}
+            </ErrorMessage>
             <button
               type="submit"
               disabled={isSubmitting}
@@ -114,7 +116,12 @@ const SignUpM = () => {
             >
               Sign Up
             </button>
-            <p>Already have an account? <Link id="signUpLink" className="link" to="/login">Login</Link></p> 
+            <p>
+              Already have an account?{" "}
+              <Link id="signUpLink" className="link" to="/login">
+                Login
+              </Link>
+            </p>
           </Form>
         )}
       </Formik>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Field, ErrorMessage, Form } from "formik";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import * as api from "../../../Util/api";
 import * as Yup from "yup";
 import Button from "@material-ui/core/Button";
@@ -98,10 +98,12 @@ const ProfileM = ({ email }) => {
         history.push("/login");
       }
     } catch (error) {
-      setPasswordWarning({
-        show: true,
-        info: "Password Change Failed!",
-      });
+      if (error.response.status === 400) {
+        setPasswordWarning({
+          show: true,
+          info: "Password Change Failed!",
+        });
+      }
     }
   };
 

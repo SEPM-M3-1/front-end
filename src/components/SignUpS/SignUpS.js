@@ -32,9 +32,9 @@ const SignUpS = () => {
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
         "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
       ),
-    mobile: Yup.string().required("Mobile Required!"),
+    phone: Yup.string().required("Mobile Required!"),
     address: Yup.string().required("Address Required!"),
-    workingHours: Yup.string().required(
+    hourLimits: Yup.string().required(
       "Limits for working hours per week Required!"
     ),
   });
@@ -43,32 +43,23 @@ const SignUpS = () => {
     email,
     fullName,
     password,
-    mobile,
+    phone,
     address,
-    workingHours,
-    preferredName,
+    hourLimits,
   }) => {
-    console.log(
-      email,
-      fullName,
-      password,
-      mobile,
-      address,
-      workingHours,
-      preferredName
-    );
+    console.log(email, fullName, password, phone, address, hourLimits);
     try {
-      const signupRes = await api.siguns({
+      const signupRes = await api.signups({
         email,
         fullName,
         password,
-        mobile,
+        phone,
         address,
-        workingHours,
-        preferredName,
+        hourLimits,
       });
       if (signupRes.status === 200) {
-        history.push("");
+        // history.push("");
+        alert("Sign up for staff success!");
       }
     } catch (error) {
       if (error.response.status === 400) {
@@ -141,24 +132,24 @@ const SignUpS = () => {
                 </span>
               )}
             </ErrorMessage>
-            <label htmlFor="mobile" style={{ display: "block" }}>
+            <label htmlFor="phone" style={{ display: "block" }}>
               Mobile Number
             </label>
             <Field
               label="mobile number"
-              id="mobile"
-              type="mobile"
-              name="mobile"
-              autoComplete="mobile"
+              id="phone"
+              type="phone"
+              name="phone"
+              autoComplete="phone"
             />
-            <ErrorMessage name="mobile">
+            <ErrorMessage name="phone">
               {(msg) => (
                 <span className="error" style={{ display: "block" }}>
                   {msg}
                 </span>
               )}
             </ErrorMessage>
-            <label htmlFor="preferredName" style={{ display: "block" }}>
+            {/* <label htmlFor="preferredName" style={{ display: "block" }}>
               Preferred Name(Optional)
             </label>
             <Field
@@ -174,7 +165,7 @@ const SignUpS = () => {
                   {msg}
                 </span>
               )}
-            </ErrorMessage>
+            </ErrorMessage> */}
             <label htmlFor="address" style={{ display: "block" }}>
               Address
             </label>
@@ -192,17 +183,17 @@ const SignUpS = () => {
                 </span>
               )}
             </ErrorMessage>
-            <label htmlFor="workingHours" style={{ display: "block" }}>
+            <label htmlFor="hourLimits" style={{ display: "block" }}>
               Limits for working hours per week
             </label>
             <Field
               label="Working Hours"
-              id="workingHours"
-              type="workingHours"
-              name="workingHours"
-              autoComplete="workingHours"
+              id="hourLimits"
+              type="hourLimits"
+              name="hourLimits"
+              autoComplete="hourLimits"
             />
-            <ErrorMessage name="workingHours">
+            <ErrorMessage name="hourLimits">
               {(msg) => (
                 <span className="error" style={{ display: "block" }}>
                   {msg}
