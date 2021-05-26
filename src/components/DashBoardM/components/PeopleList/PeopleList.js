@@ -117,7 +117,7 @@ const PeopleList = () => {
 
   const handleEdit = (row) => {
     const staffEmail = row.email;
-    const currentHours = row.limitHours;
+    const currentHours = row.hourLimits;
     const fullName = row.fullName;
     setOpen(true);
     setHours({
@@ -125,6 +125,7 @@ const PeopleList = () => {
       name: fullName,
       newHours: currentHours,
     });
+    console.log(hours);
   };
 
   const handleClose = () => {
@@ -145,7 +146,6 @@ const PeopleList = () => {
     // console.log("change success");
     //   }
     // } catch (error) {
-
     // }
   };
   return (
@@ -192,7 +192,7 @@ const PeopleList = () => {
                 <TableCell component="th" scope="row">
                   {row.fullName}
                 </TableCell>
-                <TableCell align="right">{row.limitHours}</TableCell>
+                <TableCell align="right">{row.hourLimits}</TableCell>
                 <TableCell align="right">{row.email}</TableCell>
                 <TableCell align="right">{row.phone}</TableCell>
                 <TableCell align="right">{row.address}</TableCell>
