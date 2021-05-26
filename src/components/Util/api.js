@@ -69,6 +69,18 @@ export const setAvailableTime = ({ ownerId, endDate, startDate }) =>
     },
   });
 
+export const createShift = ({ ownerId, startDate, endDate }) =>
+  axios({
+    method: "post",
+    url: `${baseUrl}/createshift`,
+    data: {
+      allocated: ownerId,
+      startDate,
+      endDate,
+      location: "Melbourne",
+    },
+  });
+
 export const changeManagerProfile = ({ id, fullName, phone, email }) =>
   axios({
     method: "put",
@@ -165,12 +177,13 @@ export const refuse = ({ email, fullName, startTime, endTime }) =>
     },
   });
 
-export const getAvilablestaff = ({ startTime, endTime }) =>
+export const getAvilablestaff = ({ startTime, endTime, ownerId }) =>
   axios({
     method: "get",
     url: `${baseUrl}/avilablestaff`,
     params: {
       startTime,
       endTime,
+      allocated: ownerId,
     },
   });

@@ -30,6 +30,7 @@ import {
 // import ColorLens from "@material-ui/icons/ColorLens";
 import { withStyles } from "@material-ui/core/styles";
 import { owners } from "./tasks";
+import * as api from "../../../Util/api";
 
 // Start Style
 const styles = (theme) => ({
@@ -392,6 +393,20 @@ class ManagerShift extends React.PureComponent {
         const endDate = data[0].endDate.getTime();
         const ownerId = data[0].ownerId;
         console.log(id, title, startDate, endDate, ownerId, "add");
+        try {
+          const createShiftResponse = api.createShift({
+            ownerId,
+            endDate,
+            startDate,
+          });
+          if (createShiftResponse.status === 200) {
+            alert("set time successful!");
+          }
+        } catch (error) {
+          if (error.response.status === 400) {
+            alert("set time fail!");
+          }
+        }
       }
       if (changed) {
         data = data.map((appointment) =>
