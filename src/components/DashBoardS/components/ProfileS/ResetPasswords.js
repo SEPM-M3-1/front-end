@@ -4,9 +4,9 @@ import { useHistory } from "react-router-dom";
 import * as api from "../../../Util/api";
 import * as Yup from "yup";
 import Button from "@material-ui/core/Button";
-import "./ProfileM.css";
+// import "./ProfileM.css";
 
-const ResetPassword = ({ onClick, showPasswordForm }) => {
+const ResetPasswordS = ({ onClick, showPasswordForm }) => {
   const history = useHistory();
 
   const [password, setPassword] = useState({
@@ -21,7 +21,8 @@ const ResetPassword = ({ onClick, showPasswordForm }) => {
 
   const resetPassword = async ({ oldPassword, password }) => {
     const id = localStorage.getItem("id");
-    const type = "MANAGER";
+    const type = "STAFF";
+    console.log(id);
     try {
       const changePasswordRes = await api.ChangePassword({
         id,
@@ -139,4 +140,4 @@ const ResetPassword = ({ onClick, showPasswordForm }) => {
   );
 };
 
-export default ResetPassword;
+export default ResetPasswordS;

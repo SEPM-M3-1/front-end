@@ -51,6 +51,8 @@ const PeopleList = () => {
     try {
       const getAllManagerRes = await api.getAllManagers(type);
       if (getAllManagerRes.status === 200) {
+        console.log(getAllManagerRes.data);
+
         setManager({
           managerList: getAllManagerRes.data,
         });
@@ -148,7 +150,7 @@ const PeopleList = () => {
   };
   return (
     <div className="list">
-      <div className="title">Manager</div>
+      <h1 className="title">Manager</h1>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -165,13 +167,13 @@ const PeopleList = () => {
                   {row.fullName}
                 </TableCell>
                 <TableCell align="right">{row.email}</TableCell>
-                <TableCell align="right">{row.mobile}</TableCell>
+                <TableCell align="right">{row.phone}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <div className="title">Staff</div>
+      <h1 className="title">Staff</h1>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -192,7 +194,7 @@ const PeopleList = () => {
                 </TableCell>
                 <TableCell align="right">{row.limitHours}</TableCell>
                 <TableCell align="right">{row.email}</TableCell>
-                <TableCell align="right">{row.mobile}</TableCell>
+                <TableCell align="right">{row.phone}</TableCell>
                 <TableCell align="right">{row.address}</TableCell>
                 <TableCell align="right">
                   <Button

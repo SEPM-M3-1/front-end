@@ -72,7 +72,7 @@ export const setAvailableTime = ({ ownerId, endDate, startDate }) =>
 export const changeManagerProfile = ({ id, fullName, phone, email }) =>
   axios({
     method: "put",
-    url: `${baseUrl}/managerprofile`,
+    url: `${baseUrl}/managerprofile/change`,
     data: {
       id,
       email,
