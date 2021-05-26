@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Field, ErrorMessage, Form } from "formik";
-import { useHistory } from "react-router-dom";
 import * as api from "../../../Util/api";
 import * as Yup from "yup";
 import Button from "@material-ui/core/Button";
 import "./ProfileM.css";
+import ResetPassword from "./ResetPassword";
 
 const ProfileM = () => {
-  const history = useHistory();
-
   const [mProfile, setMProfile] = useState({
     fullName: " ",
     phone: " ",
@@ -16,10 +14,6 @@ const ProfileM = () => {
   });
 
   const [warning, setWarning] = useState({
-    show: false,
-    info: "",
-  });
-  const [passwordWarning, setPasswordWarning] = useState({
     show: false,
     info: "",
   });
@@ -57,7 +51,7 @@ const ProfileM = () => {
     setShowPasswordForm(!showPasswordForm);
   };
 
-  const onSubmit = async ({ fullName, phone, email }) => {
+  const handleSubmit = async ({ fullName, phone, email }) => {
     console.log(fullName, phone, email);
     const id = localStorage.getItem("id");
     try {
@@ -86,31 +80,6 @@ const ProfileM = () => {
     }
   };
 
-  const resetPassword = async ({ email, oldPassword, password }) => {
-    try {
-      const changePasswordRes = await api.ChangePassword({
-        email,
-        oldPassword,
-        password,
-      });
-
-      if (changePasswordRes.status === 200) {
-        setPasswordWarning({
-          show: true,
-          info: "Password Change Successfully!",
-        });
-        history.push("/login");
-      }
-    } catch (error) {
-      if (error.response.status === 400) {
-        setPasswordWarning({
-          show: true,
-          info: "Password Change Failed!",
-        });
-      }
-    }
-  };
-
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Please enter valid email")
@@ -129,7 +98,7 @@ const ProfileM = () => {
         <Formik
           enableReinitialize
           initialValues={mProfile}
-          onSubmit={onSubmit}
+          onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
           {({ isSubmitting }) => (
@@ -216,82 +185,7 @@ const ProfileM = () => {
       ) : null}
 
       {showPasswordForm ? (
-        <div className="resetBox">
-          <div className="resetPassword">
-            <h1 style={{ display: "block" }}>Change Your Password</h1>
-            {passwordWarning.show ? (
-              <span style={{ color: "red" }}>{passwordWarning.info}</span>
-            ) : null}
-
-            <Formik
-              initialValues={mProfile}
-              onSubmit={resetPassword}
-              validationSchema={validationSchema}
-            >
-              {({ isSubmitting }) => (
-                <Form>
-                  <label
-                    htmlFor="password"
-                    style={{ display: "block" }}
-                    className="itemLabel"
-                  >
-                    Old Password
-                  </label>
-                  <Field
-                    label="oldPassword"
-                    name="oldPassword"
-                    type="password"
-                    id="oldPassword"
-                    autoFocus
-                    autoComplete="oldPassword"
-                  />
-                  <div>
-                    <ErrorMessage name="oldPassword">
-                      {(msg) => <span className="error">{msg}</span>}
-                    </ErrorMessage>
-                  </div>
-
-                  <label
-                    htmlFor="password"
-                    style={{ display: "block" }}
-                    className="itemLabel"
-                  >
-                    New Password
-                  </label>
-                  <Field
-                    label="password"
-                    name="password"
-                    type="password"
-                    id="password"
-                    autoFocus
-                    autoComplete="password"
-                  />
-                  <div>
-                    <ErrorMessage name="password">
-                      {(msg) => <span className="error">{msg}</span>}
-                    </ErrorMessage>
-                  </div>
-
-                  <div className="itemLabel">
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                      disabled={isSubmitting}
-                    >
-                      Reset Password
-                    </Button>
-                  </div>
-                </Form>
-              )}
-            </Formik>
-            <div className="cancelResetPasswordButton">
-              <Button variant="contained" color="primary" onClick={onclick}>
-                Cancel
-              </Button>
-            </div>
-          </div>
-        </div>
+        <ResetPassword onClick={onclick} showPasswordForm={showPasswordForm} />
       ) : null}
     </div>
   );
