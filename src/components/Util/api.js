@@ -137,13 +137,13 @@ export const getAllStaffs = () =>
     url: `${baseUrl}/allstaff`,
   });
 
-export const changeHours = (email, hours) =>
+export const changeHours = ({ id, hour }) =>
   axios({
     method: "put",
-    url: `${baseUrl}/newLimitHours`,
+    url: `${baseUrl}/changehourlimits`,
     data: {
-      email,
-      hours,
+      id,
+      hourLimits: hour,
     },
   });
 
@@ -160,6 +160,16 @@ export const refuse = ({ email, fullName, startTime, endTime }) =>
     data: {
       email,
       fullName,
+      startTime,
+      endTime,
+    },
+  });
+
+export const getAvilablestaff = ({ startTime, endTime }) =>
+  axios({
+    method: "get",
+    url: `${baseUrl}/avilablestaff`,
+    params: {
       startTime,
       endTime,
     },

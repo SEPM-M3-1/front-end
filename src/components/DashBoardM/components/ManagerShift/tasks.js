@@ -1,4 +1,5 @@
 import { green, deepOrange, lightBlue } from "@material-ui/core/colors";
+import * as api from "../../../Util/api";
 
 export const tasks = [
   // {
@@ -214,6 +215,11 @@ export const priorities = [
   // { id: 2, text: "Medium Priority", color: lightBlue },
   // { id: 3, text: "High Priority", color: deepOrange },
 ];
+
+export function ownersList() {
+  const staffListResponse = api.getAllStaffs();
+  return staffListResponse.data;
+}
 
 export const owners = [
   {

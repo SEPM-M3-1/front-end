@@ -28,7 +28,7 @@ import {
 // import Opacity from "@material-ui/icons/Opacity";
 // import ColorLens from "@material-ui/icons/ColorLens";
 import { withStyles } from "@material-ui/core/styles";
-import { owners } from "./tasks";
+// import { owners } from "./tasks";
 import * as api from "../../../Util/api";
 
 // Start Style
@@ -193,6 +193,17 @@ const appointments = [
   //   exDate: "20210710T080000Z,20210724T080000Z",
   //   ownerId: 3,
   // },
+];
+
+const name = localStorage.getItem("name");
+
+const ownerId = localStorage.getItem("id");
+
+const owners = [
+  {
+    text: name,
+    id: ownerId,
+  },
 ];
 
 const resources = [

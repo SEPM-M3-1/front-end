@@ -215,9 +215,13 @@ export const priorities = [
   // { id: 3, text: "High Priority", color: deepOrange },
 ];
 
+const name = localStorage.getItem("name");
+
+const ownerId = localStorage.getItem("id");
+
 export const owners = [
   {
-    text: "Tianqi Liao",
-    id: 127,
+    text: name,
+    id: ownerId,
   },
 ];

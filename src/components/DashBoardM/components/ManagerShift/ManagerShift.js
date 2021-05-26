@@ -23,6 +23,7 @@ import {
   Resources,
   DragDropProvider,
 } from "@devexpress/dx-react-scheduler-material-ui";
+
 // import WbSunny from "@material-ui/icons/WbSunny";
 // import FilterDrama from "@material-ui/icons/FilterDrama";
 // import Opacity from "@material-ui/icons/Opacity";
@@ -155,13 +156,13 @@ const WeatherIcon = ({ classes, id }) => {
   switch (id) {
     case 0:
       return null;
-      // return <Opacity className={classes.rain} fontSize="large" />;
+    // return <Opacity className={classes.rain} fontSize="large" />;
     case 1:
       return null;
-      // return <WbSunny className={classes.sun} fontSize="large" />;
+    // return <WbSunny className={classes.sun} fontSize="large" />;
     case 2:
       return null;
-      // return <FilterDrama className={classes.cloud} fontSize="large" />;
+    // return <FilterDrama className={classes.cloud} fontSize="large" />;
     default:
       return null;
   }
@@ -290,8 +291,6 @@ const DayScaleCell = (props) => (
   />
 );
 
-
-
 // #FOLD_BLOCK
 const CellBase = React.memo(
   ({
@@ -366,10 +365,18 @@ class ManagerShift extends React.PureComponent {
 
     this.state = {
       data: appointments,
+      owners: [
+        {
+          text: "",
+          id: "",
+        },
+      ],
     };
 
     this.commitChanges = this.commitChanges.bind(this);
   }
+
+  componentDidMount;
 
   // put axios in here
   commitChanges({ added, changed, deleted }) {
@@ -384,7 +391,7 @@ class ManagerShift extends React.PureComponent {
         const startDate = data[0].startDate.getTime();
         const endDate = data[0].endDate.getTime();
         const ownerId = data[0].ownerId;
-        console.log(id, title, startDate,endDate, ownerId, "add");
+        console.log(id, title, startDate, endDate, ownerId, "add");
       }
       if (changed) {
         data = data.map((appointment) =>
@@ -397,17 +404,17 @@ class ManagerShift extends React.PureComponent {
         const startDate = data[0].startDate.getTime();
         const endDate = data[0].endDate.getTime();
         const ownerId = data[0].ownerId;
-        console.log(id, title, startDate,endDate, ownerId,"change");
+        console.log(id, title, startDate, endDate, ownerId, "change");
       }
       if (deleted !== undefined) {
         data = data.filter((appointment) => appointment.id !== deleted);
-        console.log(data,"deleted");
+        console.log(data, "deleted");
       }
       return { data };
     });
   }
-//////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
 
   render() {
     const { data } = this.state;
@@ -417,15 +424,12 @@ class ManagerShift extends React.PureComponent {
         <Scheduler data={data}>
           <EditingState onCommitChanges={this.commitChanges} />
           <ViewState defaultCurrentDate={Date()} />
-          <WeekView
-            startDayHour={8}
-            endDayHour={18}
-          />
+          <WeekView startDayHour={8} endDayHour={18} />
           <MonthView
             // timeTableCellComponent={TimeTableCell} display color for every day
             dayScaleCellComponent={DayScaleCell}
           />
-         
+
           <Appointments
             appointmentComponent={Appointment} //css style
             appointmentContentComponent={AppointmentContent}

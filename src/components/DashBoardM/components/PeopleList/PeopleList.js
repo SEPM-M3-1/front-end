@@ -32,7 +32,10 @@ const PeopleList = () => {
 
   const [open, setOpen] = React.useState(false);
 
+  const [count, setCount] = React.useState(0);
+
   const [hours, setHours] = useState({
+    staffId: 0,
     email: "",
     name: "",
     newHours: "",
@@ -64,18 +67,6 @@ const PeopleList = () => {
         });
       }
     }
-    // setManager({
-    //   managerList:
-    //   [{
-    //     fullName: 'manager1',
-    //     email: 'manager1@gmail.com',
-    //     mobile: '0451172301'
-    //   }, {
-    //     fullName: 'manager2',
-    //     email: 'manager2@gmail.com',
-    //     mobile: '0451172301'
-    //   }]
-    // })
   };
 
   const getStaff = async () => {
@@ -89,28 +80,11 @@ const PeopleList = () => {
     } else {
       setStaff({ staffList: [] });
     }
-
-    //   setStaff({
-    //     staffList:
-    //     // [{
-    //     //   fullName: 'staff1',
-    //     //   limitHours: "40",
-    //     //   email: 'staff1@gmail.com',
-    //     //   mobile: '0451172301',
-    //     //   address: '102 box st'
-    //     // }, {
-    //     //   fullName: 'staff2',
-    //     //   limitHours: "50",
-    //     //   email: 'staff2@gmail.com',
-    //     //   mobile: '0451172301',
-    //     //   address: '102 box st'
-    //     // }]
-    //   })
   };
 
   useEffect(() => {
     getManager(), getStaff();
-  }, []);
+  }, [count]);
 
   const { staffList } = staff;
   const { managerList } = manager;
@@ -121,6 +95,7 @@ const PeopleList = () => {
     const fullName = row.fullName;
     setOpen(true);
     setHours({
+      staffId: row.id,
       email: staffEmail,
       name: fullName,
       newHours: currentHours,
@@ -138,16 +113,17 @@ const PeopleList = () => {
 
   const handleChange = async ({ hour }) => {
     setOpen(false);
-    const email = hours.email;
-    console.log(email, hour);
-    // try {
-    //   const changeHoursRes = await api.changeHours({ email, hour });
-    //   if (changeHoursRes.status === 200) {
-    // console.log("change success");
-    //   }
-    // } catch (error) {
-    // }
+    const id = hours.staffId;
+    console.log(id, hour);
+    try {
+      const changeHoursRes = await api.changeHours({ id, hour });
+      if (changeHoursRes.status === 200) {
+        console.log("change success");
+        setCount(count + 1);
+      }
+    } catch (error) {}
   };
+
   return (
     <div className="list">
       <h1 className="title">Manager</h1>
