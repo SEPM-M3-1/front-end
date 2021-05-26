@@ -26,25 +26,25 @@ const ProfileM = () => {
 
   const getMprofile = async () => {
     const email = localStorage.getItem("email");
-    try {
-      const getMprofileResponse = await api.fetchManagerProfileByEmail({
-        email,
-      });
-      if (getMprofileResponse.status === 200) {
-        setMProfile({
-          fullName: getMprofileResponse.data.fullName,
-          phone: getMprofileResponse.data.phone,
-          email: getMprofileResponse.data.email,
-        });
-        console.log(getMprofileResponse.data);
-      }
-      console.log(mProfile);
-    } catch (error) {
-      setWarning({
-        show: true,
-        info: "Get the Init Data Failed!",
-      });
-    }
+    // try {
+    //   const getMprofileResponse = await api.fetchManagerProfileByEmail({
+    //     email,
+    //   });
+    //   if (getMprofileResponse.status === 200) {
+    //     setMProfile({
+    //       fullName: getMprofileResponse.data.fullName,
+    //       phone: getMprofileResponse.data.phone,
+    //       email: getMprofileResponse.data.email,
+    //     });
+    //     console.log(getMprofileResponse.data);
+    //   }
+    //   console.log(mProfile);
+    // } catch (error) {
+    //   setWarning({
+    //     show: true,
+    //     info: "Get the Init Data Failed!",
+    //   });
+    // }
   };
 
   const onclick = () => {
@@ -54,38 +54,36 @@ const ProfileM = () => {
   const handleSubmit = async ({ fullName, phone, email }) => {
     console.log(fullName, phone, email);
     const id = localStorage.getItem("id");
-    try {
-      const mprofileResponse = await api.changeManagerProfile({
-        id,
-        fullName,
-        phone,
-        email,
-      });
-      if (mprofileResponse.status === 200) {
-        setMProfile({
-          fullName: mprofileResponse.data.fullName,
-          phoneNum: mprofileResponse.data.phoneNum,
-          email: mprofileResponse.data.email,
-        });
-        setWarning({
-          show: true,
-          info: "Change Profile Successfully!",
-        });
-      }
-    } catch (error) {
-      setWarning({
-        show: true,
-        info: "Change Profile Failed",
-      });
-    }
+    // try {
+    //   const mprofileResponse = await api.changeManagerProfile({
+    //     id,
+    //     fullName,
+    //     phone,
+    //     email,
+    //   });
+    //   if (mprofileResponse.status === 200) {
+    //     setMProfile({
+    //       fullName: mprofileResponse.data.fullName,
+    //       phoneNum: mprofileResponse.data.phoneNum,
+    //       email: mprofileResponse.data.email,
+    //     });
+    //     setWarning({
+    //       show: true,
+    //       info: "Change Profile Successfully!",
+    //     });
+    //   }
+    // } catch (error) {
+    //   setWarning({
+    //     show: true,
+    //     info: "Change Profile Failed",
+    //   });
+    // }
   };
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Please enter valid email")
       .required("Email Required!"),
-    password: Yup.string().required("Password Required!"),
-    oldPassword: Yup.string().required(),
   });
 
   return (
@@ -101,7 +99,7 @@ const ProfileM = () => {
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
-          {({ isSubmitting }) => (
+          {/* {({ isSubmitting }) => ( */}
             <Form>
               <label
                 htmlFor="fullName"
@@ -166,13 +164,12 @@ const ProfileM = () => {
                   variant="contained"
                   color="primary"
                   type="submit"
-                  disabled={isSubmitting}
                 >
                   Comfirm Change
                 </Button>
               </div>
             </Form>
-          )}
+          {/* )} */}
         </Formik>
       </div>
 

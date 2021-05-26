@@ -19,7 +19,8 @@ const ResetPassword = ({ onClick, showPasswordForm }) => {
     info: "",
   });
 
-  const resetPassword = async ({ email, oldPassword, password }) => {
+  const resetPassword = async ({ oldPassword, password }) => {
+    const email = localStorage.getItem("email");
     try {
       const changePasswordRes = await api.ChangePassword({
         email,
@@ -45,9 +46,6 @@ const ResetPassword = ({ onClick, showPasswordForm }) => {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Please enter valid email")
-      .required("Email Required!"),
     password: Yup.string().required("Password Required!"),
     oldPassword: Yup.string().required(),
   });
@@ -77,7 +75,7 @@ const ResetPassword = ({ onClick, showPasswordForm }) => {
               <Field
                 label="oldPassword"
                 name="oldPassword"
-                type="password"
+                type="oldPassword"
                 id="oldPassword"
                 autoFocus
                 autoComplete="oldPassword"
