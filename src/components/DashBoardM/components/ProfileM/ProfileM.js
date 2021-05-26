@@ -127,6 +127,7 @@ const ProfileM = () => {
           <span style={{ color: "red" }}>{warning.info}</span>
         ) : null}
         <Formik
+          enableReinitialize
           initialValues={mProfile}
           onSubmit={onSubmit}
           validationSchema={validationSchema}
