@@ -23,13 +23,13 @@ const NotificationS = () => {
     const email = localStorage.getItem("email");
     setMessage({
       list: [{
-        fullName: 'Plus',
-        startTime: '2020/05/12/8:00AM',
-        endTime: '2020/05/12/12:00AM'
+        fullName: 'JIAHAO XU',
+        startTime: '2020/05/31/8:00AM',
+        endTime: '2020/05/31/12:00AM'
       },{
-        fullName: 'Plus',
-        startTime: '2020/05/15/8:00AM',
-        endTime: '2020/05/15/12:00AM'
+        fullName: 'JIAHAO Xu',
+        startTime: '2020/06/01/8:00AM',
+        endTime: '2020/06/01/12:00AM'
       }
       ]
     })

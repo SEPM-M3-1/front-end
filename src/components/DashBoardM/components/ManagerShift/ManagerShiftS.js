@@ -23,12 +23,13 @@ import {
   Resources,
   DragDropProvider,
 } from "@devexpress/dx-react-scheduler-material-ui";
+
 // import WbSunny from "@material-ui/icons/WbSunny";
 // import FilterDrama from "@material-ui/icons/FilterDrama";
 // import Opacity from "@material-ui/icons/Opacity";
 // import ColorLens from "@material-ui/icons/ColorLens";
 import { withStyles } from "@material-ui/core/styles";
-// import { owners } from "./tasks";
+import { owners } from "./tasks";
 import * as api from "../../../Util/api";
 
 // Start Style
@@ -172,17 +173,98 @@ const WeatherIcon = ({ classes, id }) => {
 const appointments = [
   {
     id: 0,
-    title: "Robert Xu",
+    title: "Tianqi Liao",
+    startDate: new Date(2021, 4, 10, 8, 0),
+    endDate: new Date(2021, 4, 10, 12, 0),
+    ownerId: 1,
+  },
+  {
+    id: 1,
+    title: "Shuhao Liu",
+    startDate: new Date(2021, 4, 10, 14, 0),
+    endDate: new Date(2021, 4, 10, 18, 0),
+    ownerId: 2,
+  },
+  {
+    id: 2,
+    title: "Zelong Wang",
+    startDate: new Date(2021, 4, 11, 8, 0),
+    endDate: new Date(2021, 4, 11, 12, 0),
+    ownerId: 3,
+  },
+  {
+    id: 3,
+    title: "YUN-TUNG SHIH",
+    startDate: new Date(2021, 4, 11, 14, 0),
+    endDate: new Date(2021, 4, 11, 18, 0),
+    ownerId: 4,
+  },
+  {
+    id: 4,
+    title: "Jiahao Ai",
+    startDate: new Date(2021, 4, 12, 8, 0),
+    endDate: new Date(2021, 4, 12, 12, 0),
+    ownerId: 5,
+  },
+  {
+    id: 5,
+    title: "Jiahao Xu",
     startDate: new Date(2021, 4, 31, 8, 0),
     endDate: new Date(2021, 4, 31, 12, 0),
-    ownerId: 1,
+    ownerId: 6,
+  },
+  {
+    id: 5,
+    title: "Jiahao Xu",
+    startDate: new Date(2021, 5, 1, 8, 0),
+    endDate: new Date(2021, 5, 1, 12, 0),
+    ownerId: 6,
   },
   // {
   //   id: 2,
-  //   title: "Robert Xu",
-  //   startDate: new Date(2021, 5, 1, 8, 0),
-  //   endDate: new Date(2021, 5, 1, 12, 0),
+  //   title: "Tianqi Liao",
+  //   startDate: new Date(2021, 4, 13, 8, 0),
+  //   endDate: new Date(2021, 4, 13, 12, 0),
   //   ownerId: 1,
+  // },
+  // {
+  //   id: 3,
+  //   title: "Zelong Wang",
+  //   startDate: new Date(2021, 4, 13, 14, 0),
+  //   endDate: new Date(2021, 4, 13, 18, 0),
+  //   ownerId: 3,
+  // },
+  {
+    id: 4,
+    title: "Shuhao Liao",
+    startDate: new Date(2021, 4, 31, 8, 0),
+    endDate: new Date(2021, 4, 31, 12, 0),
+    ownerId: 2,
+  },
+  {
+    id: 5,
+    title: "YUN-TUNG SHIH",
+    startDate: new Date(2021, 4, 31, 14, 0),
+    endDate: new Date(2021, 4, 31, 18, 0),
+    ownerId: 4,
+  },
+  // {
+  //   id: 5,
+  //   title: "6",
+  //   startDate: new Date(2021, 4, 5, 14, 0),
+  //   endDate: new Date(2021, 4, 5, 18, 0),
+  //   rRule: "FREQ=WEEKLY;BYDAY=FR;UNTIL=20210814",
+  //   exDate: "20210713T100000Z,20210727T100000Z",
+  //   ownerId: 2,
+  // },
+  // {
+  //   id: 6,
+  //   title: "7",
+  //   startDate: new Date(2021, 4, 28, 12, 0),
+  //   endDate: new Date(2021, 4, 28, 12, 30),
+  //   rRule: "FREQ=WEEKLY;BYDAY=TH;UNTIL=20210727",
+  //   exDate: "20210704T090000Z,20210719T090000Z",
+  //   ownerId: 4,
   // },
   // {
   //   id: 7,
@@ -193,17 +275,6 @@ const appointments = [
   //   exDate: "20210710T080000Z,20210724T080000Z",
   //   ownerId: 3,
   // },
-];
-
-const name = localStorage.getItem("name");
-
-const ownerId = localStorage.getItem("id");
-
-const owners = [
-  {
-    text: name,
-    id: ownerId,
-  },
 ];
 
 const resources = [
@@ -295,17 +366,25 @@ const FlexibleSpace = withStyles(styles, { name: "ToolbarRoot" })(
   )
 );
 
-class StaffShift extends React.PureComponent {
+class ManagerShift extends React.PureComponent {
   // #FOLD_BLOCK
   constructor(props) {
     super(props);
 
     this.state = {
       data: appointments,
+      owners: [
+        {
+          text: "",
+          id: "",
+        },
+      ],
     };
 
     this.commitChanges = this.commitChanges.bind(this);
   }
+
+  componentDidMount;
 
   // put axios in here
   commitChanges({ added, changed, deleted }) {
@@ -314,22 +393,20 @@ class StaffShift extends React.PureComponent {
       if (added) {
         const startingAddedId =
           data.length > 0 ? data[data.length - 1].id + 1 : 0;
-        data = [...data, { id: startingAddedId, ...added }];
-        console.log(data, "add");
+        data = [...data, { id: startingAddedId, ...added }].slice(-1);
         const id = data[0].id;
         const title = data[0].title;
         const startDate = data[0].startDate.getTime();
         const endDate = data[0].endDate.getTime();
         const ownerId = data[0].ownerId;
         console.log(id, title, startDate, endDate, ownerId, "add");
-
         try {
-          const availableTimeResponse = api.setAvailableTime({
+          const createShiftResponse = api.createShift({
             ownerId,
             endDate,
             startDate,
           });
-          if (availableTimeResponse.status === 200) {
+          if (createShiftResponse.status === 200) {
             alert("set time successful!");
           }
         } catch (error) {
@@ -344,7 +421,12 @@ class StaffShift extends React.PureComponent {
             ? { ...appointment, ...changed[appointment.id] }
             : appointment
         );
-        console.log(data, "change");
+        const id = data[0].id;
+        const title = data[0].title;
+        const startDate = data[0].startDate.getTime();
+        const endDate = data[0].endDate.getTime();
+        const ownerId = data[0].ownerId;
+        console.log(id, title, startDate, endDate, ownerId, "change");
       }
       if (deleted !== undefined) {
         data = data.filter((appointment) => appointment.id !== deleted);
@@ -360,7 +442,7 @@ class StaffShift extends React.PureComponent {
     const { data } = this.state;
 
     return (
-      <Paper>
+      <Paper className="size">
         <Scheduler data={data}>
           <EditingState onCommitChanges={this.commitChanges} />
           <ViewState defaultCurrentDate={Date()} />
@@ -390,4 +472,4 @@ class StaffShift extends React.PureComponent {
   }
 }
 
-export default StaffShift;
+export default ManagerShift;

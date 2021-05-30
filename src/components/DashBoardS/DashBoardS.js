@@ -70,19 +70,19 @@ export default function SimpleTabs() {
           onChange={handleChange}
           aria-label="simple tabs example"
         >
-          <Tab label="Shift Calendar" {...a11yProps(0)} />
-          <Tab label="Personal Profile" {...a11yProps(1)} />
+          <Tab label="Personal Profile" {...a11yProps(0)} />
+          <Tab label="Shift Calendar" {...a11yProps(1)} />
           <Tab label="Notification" {...a11yProps(2)} />
           <Tab label="Logout" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
+        <ProfileS />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
         <div style={{ width: "1200px", margin: "0 auto", height: "80vh" }}>
         <StaffShift />
         </div>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <ProfileS />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <NotificationS />
